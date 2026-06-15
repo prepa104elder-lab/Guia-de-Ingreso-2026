@@ -23,9 +23,21 @@
       height: 100%;
       border: none;
     }
+
+    .error-message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      background: #f8f9fc;
+      color: #721c24;
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
-  <iframe src="GuiadeIngreso2026.pdf"></iframe>
+  <iframe src="GuiadeIngreso2026.pdf" onerror="this.style.display='none'; document.body.innerHTML='<div class=\'error-message\'><h2>⚠️ No se encontró el archivo PDF</h2><p>Asegúrate de que el archivo &quot;GuiadeIngreso2026.pdf&quot; esté en la misma carpeta que esta página.</p></div>'"></iframe>
 </body>
 </html>
