@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Prepa Benito Juárez | Guía de Ingreso 2026</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8f9fc;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+
+    /* Navbar personalizado */
+    .navbar-custom {
+      background: linear-gradient(135deg, #0b2b3b 0%, #1a4b6e 100%);
+      padding: 0.8rem 1rem;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: #ffec9f !important;
+      letter-spacing: -0.5px;
+    }
+
+    .navbar-brand i {
+      color: #ffcd7e;
+      margin-right: 8px;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      color: #f1f9ff !important;
+      transition: 0.2s;
+      margin: 0 4px;
+    }
+
+    .nav-link:hover {
+      color: #ffdd99 !important;
+      transform: translateY(-2px);
+    }
+
+    /* Botón alerta en navbar */
+    .alert-btn {
+      background-color: #ffb347;
+      border: none;
+      color: #2c3e2f;
+      font-weight: 600;
+      border-radius: 40px;
+      padding: 6px 18px;
+      transition: 0.2s;
+    }
+
+    .alert-btn:hover {
+      background-color: #ff9f1a;
+      transform: scale(1.02);
+      color: #1e2a2e;
+    }
+
+    /* Hero imagen local */
+    .hero-image {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-bottom: 4px solid #ffcd7e;
+    }
+
+    /* Tarjetas de materias */
+    .card-materia {
+      border: none;
+      border-radius: 1.5rem;
+      background: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .card-materia:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-header-materia {
+      background: linear-gradient(120deg, #e9f0f5, #ffffff);
+      padding: 1rem 1rem 0.5rem 1rem;
+      border-bottom: 2px solid #ffcd7e;
+    }
+
+    .card-title-materia {
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: #1f4e6e;
+      margin-bottom: 0.25rem;
+    }
+
+    .card-badge {
+      font-size: 0.7rem;
+      background-color: #ffecb3;
+      color: #b45f06;
+      border-radius: 30px;
+      padding: 4px 12px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .card-body-materia {
+      padding: 1.2rem;
+    }
+
+    .materia-icon {
+      font-size: 2rem;
+      margin-right: 10px;
+      color: #e68a2e;
+    }
+
+    .btn-ver {
+      background-color: #2c7da0;
+      border: none;
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-weight: 600;
+      color: white;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    .btn-ver:hover {
+      background-color: #1a5f7a;
+      transform: scale(1.02);
+    }
+
+    /* Formulario de dudas estilo WhatsApp (dentro del footer) */
+    .form-dudas-wa {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+      border-radius: 1.5rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(255, 205, 126, 0.5);
+    }
+    .form-dudas-wa input, .form-dudas-wa textarea {
+      background-color: #fef9e6;
+      border: 1px solid #ffcd7e;
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+    .form-dudas-wa input:focus, .form-dudas-wa textarea:focus {
+      box-shadow: 0 0 0 3px rgba(255, 180, 71, 0.3);
+      border-color: #ffb347;
+      outline: none;
+    }
+    .btn-enviar-wa {
+      background-color: #25D366;
+      border: none;
+      border-radius: 2rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      transition: 0.2s;
+      color: white;
+      width: 100%;
+    }
+    .btn-enviar-wa:hover {
+      background-color: #128C7E;
+      transform: scale(1.02);
+    }
+
+    /* Estilos para el visor PDF */
+    .pdf-container {
+      background: #e9ecef;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    .pdf-viewer {
+      width: 100%;
+      height: 75vh;
+      border: none;
+      border-radius: 1rem;
+      background: white;
+    }
+    .btn-download-pdf {
+      background-color: #25d366;
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 40px;
+      padding: 8px 24px;
+      transition: 0.2s;
+    }
+    .btn-download-pdf:hover {
+      background-color: #128C7E;
+      transform: scale(1.02);
+    }
+
+    /* Footer general */
+    .footer-custom {
+      background-color: #0b2b3b;
+      color: #eef4fa;
+      padding: 2rem 0 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .footer-custom a {
+      color: #ffd966;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .footer-custom a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .social-icons i {
+      font-size: 1.6rem;
+      margin: 0 10px;
+      transition: 0.2s;
+    }
+
+    .social-icons i:hover {
+      transform: translateY(-3px);
+      color: #ffb347;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+      .hero-image {
+        max-height: 180px;
+      }
+      .form-dudas-wa {
+        margin-top: 1rem;
+      }
+      .pdf-viewer {
+        height: 55vh;
+      }
+    }
+      /* ========== MODALES PARA CUESTIONARIOS ========== */
+.modal-quiz {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 3000;
+    overflow-y: auto;
+}
+
+.modal-quiz-content {
+    background: #f8f9fc;
+    margin: 20px auto;
+    max-width: 900px;
+    border-radius: 28px;
+    animation: fadeInModal 0.3s ease;
+    overflow: hidden;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-quiz-header {
+    background: linear-gradient(135deg, #0b2b3b, #1a4b6e);
+    color: white;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-quiz-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.close-modal-quiz {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal-quiz:hover {
+    transform: scale(1.1);
+}
+
+.quiz-body-modal {
+    padding: 25px;
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.question-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #ffb347;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.question-text-modal {
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #1a4b6e;
+    line-height: 1.4;
+}
+
+.options-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-modal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    background: white;
+    transition: all 0.2s;
+}
+
+.option-modal:hover {
+    background: #fff8ed;
+    border-color: #ffb347;
+}
+
+.option-modal input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.option-modal label {
+    cursor: pointer;
+    flex: 1;
+    margin: 0;
+    font-weight: normal;
+}
+
+.feedback-modal {
+    margin-top: 12px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.feedback-modal.correct {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.feedback-modal.incorrect {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.modal-quiz-footer {
+    padding: 20px 25px;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-reset-quiz {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-reset-quiz:hover {
+    background: #5a6268;
+}
+
+.btn-submit-quiz {
+    background: linear-gradient(135deg, #2c7da0, #1a5f7a);
+    color: white;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-submit-quiz:hover {
+    transform: scale(1.02);
+}
+
+.result-modal-quiz {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 28px;
+    text-align: center;
+    z-index: 3100;
+    min-width: 320px;
+    display: none;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+.result-modal-quiz h3 {
+    color: #0b2b3b;
+    margin-bottom: 15px;
+}
+
+.result-score-modal {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.result-score-modal.correct { color: #28a745; }
+.result-score-modal.incorrect { color: #dc3545; }
+
+.btn-close-result {
+    background: #2c7da0;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.overlay-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 3050;
+}
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-graduation-cap"></i> 
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+                
+          <li class="nav-item"><a class="nav-link" href="visualizador-pdf.html"><i class="fas fa-file-pdf"></i> Guía 2026</a></li>
+          
+        </ul>
+        <div class="d-flex">
+          <button class="btn alert-btn" id="notifyBtn"><i class="fas fa-bell"></i> Aviso</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== IMAGEN LOCAL: portada.png ==================== -->
+  <img src="portada.png" alt="Escuela Preparatoria Lic. Benito Juárez - Portada" class="hero-image" onerror="this.onerror=null; this.src='https://placehold.co/1200x300/1e466e/white?text=Preparatoria+Benito+Juárez'; alert('No se encontró portada.png en la carpeta actual.')">
+
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <div class="main-content">
+    <div class="container py-4 py-md-5">
+      
+      <!-- Título y datos de la escuela -->
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          
+          <hr class="w-25 mx-auto mt-3" style="height: 3px; background: #ffb347;">
+        </div>
+      </div>
+
+      
+
+      <!-- SECCIÓN DE CARDS: LAS 10 MATERIAS (basadas en el PDF) -->
+      <div class="row g-4" id="cardsContainer">
+        <!-- 1. Español -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia">
+            <div class="card-header-materia">
+              <div class="d-flex align-items-center"><i class="fas fa-language materia-icon"></i><h5 class="card-title-materia mb-0">Español</h5></div>
+              <div class="card-badge"><i class="far fa-file-alt"></i> Lengua y comunicación</div>
+            </div>
+            <div class="card-body-materia">
+              <p class="card-text text-secondary small">Puntuación, ortografía, análisis de oraciones, verbos, acentuación y lectura crítica.</p>
+              <button class="btn btn-ver mt-2 card-btn" data-materia="Español"><i class="fas fa-heart me-1"></i> Explorar tema</button>
+            </div>
+          </div>
+        </div>
+        <!-- 2. Matemáticas -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia">
+            <div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-calculator materia-icon"></i><h5 class="card-title-materia mb-0">Matemáticas</h5></div><div class="card-badge"><i class="fas fa-chart-line"></i> Números, álgebra</div></div>
+            <div class="card-body-materia"><p class="card-text text-secondary small">Operaciones, fracciones, porcentajes, ecuaciones, geometría, probabilidad.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Matemáticas"><i class="fas fa-heart me-1"></i> Explorar tema</button></div>
+          </div>
+        </div>
+        <!-- 3. Física -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-atom materia-icon"></i><h5 class="card-title-materia mb-0">Física</h5></div><div class="card-badge"><i class="fas fa-tachometer-alt"></i> Movimiento, fuerzas</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Leyes de Newton, energía, electricidad, magnetismo, ondas.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Física"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 4. Química -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-flask materia-icon"></i><h5 class="card-title-materia mb-0">Química</h5></div><div class="card-badge"><i class="fas fa-vial"></i> Reacciones, tabla</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Modelo atómico, enlaces, ácidos, bases, estequiometría.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Química"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 5. Biología -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-seedling materia-icon"></i><h5 class="card-title-materia mb-0">Biología</h5></div><div class="card-badge"><i class="fas fa-dna"></i> Biodiversidad</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Evolución, fotosíntesis, respiración, reproducción, ecología.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Biología"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 6. Historia -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-landmark materia-icon"></i><h5 class="card-title-materia mb-0">Historia</h5></div><div class="card-badge"><i class="fas fa-scroll"></i> México, Mundial</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Prehispánico, Conquista, Independencia, Revolución Mexicana.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Historia"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 7. Computación -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-laptop-code materia-icon"></i><h5 class="card-title-materia mb-0">Computación</h5></div><div class="card-badge"><i class="fas fa-shield-alt"></i> Hardware, software</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">SO, ofimática, ética digital, seguridad informática.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Computación"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 8. Inglés -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-language materia-icon" style="color:#2a9d8f;"></i><h5 class="card-title-materia mb-0">Inglés</h5></div><div class="card-badge"><i class="fas fa-comment-dots"></i> Gramática</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Verbo to be, tiempos, comprensión lectora, vocabulario.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Inglés"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 9. Ética Digital -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-balance-scale materia-icon"></i><h5 class="card-title-materia mb-0">Ética Digital</h5></div><div class="card-badge"><i class="fas fa-user-shield"></i> Privacidad</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Prácticas éticas, derechos de autor, ciberseguridad.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Ética Digital"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+        <!-- 10. Salud & Sexualidad -->
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-materia"><div class="card-header-materia"><div class="d-flex align-items-center"><i class="fas fa-heartbeat materia-icon"></i><h5 class="card-title-materia mb-0">Salud & Sexualidad</h5></div><div class="card-badge"><i class="fas fa-female"></i> Bienestar</div></div>
+          <div class="card-body-materia"><p class="card-text text-secondary small">Salud reproductiva, prevención ITS, planificación familiar.</p><button class="btn btn-ver mt-2 card-btn" data-materia="Salud y Sexualidad"><i class="fas fa-heart me-1"></i> Explorar tema</button></div></div>
+        </div>
+      </div>
+
+      
+
+  <!-- ==================== FOOTER CON FORMULARIO WHATSAPP (SIN CAMPO DE CORREO) ==================== -->
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row align-items-center text-center text-md-start">
+        <!-- Columna 1: información institucional -->
+        <div class="col-md-6 mb-4 mb-md-0">
+          <h5><i class="fas fa-chalkboard-user"></i> Esc. Preparatoria Lic. Benito Juárez</h5>
+          <p class="small mb-0">Guía de Ingreso 2026 · Material de estudio basado en temario oficial.</p>
+          <div class="social-icons mt-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <!-- Columna 2: Formulario de dudas SIN CORREO (solo nombre y pregunta) -->
+        <div class="col-md-6 mb-4 mb-md-0">
+          <div class="form-dudas-wa">
+            <h6 class="mb-2"><i class="fab fa-whatsapp"></i> ¿Tienes dudas? Escríbenos</h6>
+            <form id="whatsappForm">
+              <div class="mb-2">
+                <input type="text" id="nombreUser" class="form-control form-control-sm" placeholder="Tu nombre completo" required>
+              </div>
+              <div class="mb-2">
+                <textarea id="mensajeDuda" class="form-control form-control-sm" rows="2" placeholder="Escribe tu pregunta o duda sobre ingreso, materias o guía..." required></textarea>
+              </div>
+              <button type="submit" class="btn-enviar-wa btn-sm"><i class="fab fa-whatsapp me-1"></i> Enviar duda por WhatsApp</button>
+            </form>
+            <p class="small text-center mt-2 mb-0 text-light opacity-75"><i class="fas fa-lock"></i> Tus preguntas llegan directo a la Institución</p>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS: Bootstrap, SweetAlert + lógica de formulario WhatsApp -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // ========== CONFIGURAR BOTONES PARA ABRIR CUESTIONARIOS (REEMPLAZA SweetAlert) ==========
+    
+    // Español
+    const btnEspanol = document.querySelector('.card-btn[data-materia="Español"]');
+    if (btnEspanol) {
+        btnEspanol.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenEspanol();
+        };
+        btnEspanol.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Matemáticas
+    const btnMatematicas = document.querySelector('.card-btn[data-materia="Matemáticas"]');
+    if (btnMatematicas) {
+        btnMatematicas.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenMatematicas();
+        };
+        btnMatematicas.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Física
+    const btnFisica = document.querySelector('.card-btn[data-materia="Física"]');
+    if (btnFisica) {
+        btnFisica.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenFisica();
+        };
+        btnFisica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Química
+    const btnQuimica = document.querySelector('.card-btn[data-materia="Química"]');
+    if (btnQuimica) {
+        btnQuimica.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenQuimica();
+        };
+        btnQuimica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Biología
+    const btnBiologia = document.querySelector('.card-btn[data-materia="Biología"]');
+    if (btnBiologia) {
+        btnBiologia.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenBiologia();
+        };
+        btnBiologia.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Historia
+    const btnHistoria = document.querySelector('.card-btn[data-materia="Historia"]');
+    if (btnHistoria) {
+        btnHistoria.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenHistoria();
+        };
+        btnHistoria.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Computación
+    const btnComputacion = document.querySelector('.card-btn[data-materia="Computación"]');
+    if (btnComputacion) {
+        btnComputacion.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenComputacion();
+        };
+        btnComputacion.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Inglés
+    const btnIngles = document.querySelector('.card-btn[data-materia="Inglés"]');
+    if (btnIngles) {
+        btnIngles.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenIngles();
+        };
+        btnIngles.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Ética Digital
+    const btnEtica = document.querySelector('.card-btn[data-materia="Ética Digital"]');
+    if (btnEtica) {
+        btnEtica.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenEtica();
+        };
+        btnEtica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Salud y Sexualidad
+    const btnSalud = document.querySelector('.card-btn[data-materia="Salud y Sexualidad"]');
+    if (btnSalud) {
+        btnSalud.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenSalud();
+        };
+        btnSalud.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // ========== BOTÓN DE NOTIFICACIÓN DEL NAVBAR ==========
+    document.getElementById('notifyBtn')?.addEventListener('click', () => {
+        Swal.fire({ 
+            title: '<i class="fas fa-bell"></i> Convocatoria 2026', 
+            html: 'Próximos exámenes de admisión. Consulta fechas en la escuela.', 
+            icon: 'info', 
+            confirmButtonText: 'Ok' 
+        });
+    });
+    
+    // ========== FORMULARIO WHATSAPP ==========
+    const waForm = document.getElementById('whatsappForm');
+    const numeroEscuela = "4351103935";
+    
+    if (waForm) {
+        waForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreUser').value.trim();
+            const mensaje = document.getElementById('mensajeDuda').value.trim();
+            
+            if (!nombre) {
+                Swal.fire('Nombre requerido', 'Por favor escribe tu nombre para que podamos responderte.', 'warning');
+                return;
+            }
+            if (!mensaje) {
+                Swal.fire('Escribe tu duda', 'Cuéntanos cuál es tu pregunta sobre ingreso o las materias.', 'warning');
+                return;
+            }
+            
+            let textoWhatsApp = `*Nuevo mensaje desde la página web - Prepa Benito Juárez*\n`;
+            textoWhatsApp += `📌 *Nombre:* ${nombre}\n`;
+            textoWhatsApp += `❓ *Duda o pregunta:*\n${mensaje}\n`;
+            textoWhatsApp += `---\nEnviado desde la Guía de Ingreso 2026.`;
+            
+            const mensajeCodificado = encodeURIComponent(textoWhatsApp);
+            const urlWhatsApp = `https://wa.me/52${numeroEscuela}?text=${mensajeCodificado}`;
+            
+            window.open(urlWhatsApp, '_blank');
+            
+            Swal.fire({
+                title: '¡Mensaje listo!',
+                html: `Se abrirá WhatsApp para que confirmes el envío. <br><strong>${nombre}</strong>, tu pregunta llegará a la escuela.`,
+                icon: 'success',
+                confirmButtonText: 'Muchas Gracias',
+                confirmButtonColor: '#25D366'
+            });
+            
+            document.getElementById('nombreUser').value = '';
+            document.getElementById('mensajeDuda').value = '';
+        });
+    }
+    
+    // ========== SMOOTH SCROLL PARA NAVBAR ==========
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#') && href !== '#') {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                if (targetId === 'materias') document.getElementById('cardsContainer')?.scrollIntoView({ behavior: 'smooth' });
+                else if (targetId === 'inicio') window.scrollTo({ top: 0, behavior: 'smooth' });
+                else if (targetId === 'guia') document.getElementById('guia')?.scrollIntoView({ behavior: 'smooth' });
+                else if (targetId === 'contacto') Swal.fire('Contacto', 'Tel: 4355560952 | prepa_104_consulta@hotmail.com', 'info');
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    });
+});
+      // ========== CUESTIONARIO DE ESPAÑOL (15 PREGUNTAS ESTILO MCAT) ==========
+const preguntasEspanol = [
+    { text: "Un estudiante está analizando la acentuación de palabras en español. Encuentra la palabra \"música\" y observa que la sílaba tónica es la antepenúltima. Según las reglas de acentuación del español, esta palabra debe clasificarse como:", options: ["Aguda", "Grave", "Esdrújula", "Sobreesdrújula"], correct: 2 },
+    { text: "Durante una revisión de redacción, un corrector identifica la siguiente oración escrita por un alumno: \"Hoy vo a la escuela\". El error persiste a pesar de que el alumno conoce la diferencia entre los sonidos /b/ y /v/. La falta ortográfica cometida se relaciona directamente con:", options: ["Uso incorrecto de la letra 'h'", "Confusión entre 'b' y 'v'", "Omisión del acento", "Sustitución de 'c' por 's'"], correct: 1 },
+    { text: "Al analizar la oración \"El niño alto corre rápidamente\", un lingüista identifica que una palabra tiene la función de modificar al sustantivo \"niño\", añadiendo una cualidad. Esta palabra cumple la función de:", options: ["Adverbio", "Sustantivo", "Adjetivo", "Preposición"], correct: 2 },
+    { text: "Un historiador necesita presentar cronológicamente los principales eventos de la vida de Benito Juárez, desde su nacimiento hasta su muerte, de manera visual y ordenada. Para este propósito, la herramienta más adecuada es:", options: ["Mapa conceptual", "Línea del tiempo", "Cuadro sinóptico", "Resumen"], correct: 1 },
+    { text: "En la oración \"María y Luis estudian en la biblioteca todos los viernes\", se pregunta cuál es el núcleo del sujeto. El sujeto está compuesto por dos elementos unidos por \"y\", por lo que su núcleo es:", options: ["María", "Luis", "María y Luis", "estudian"], correct: 2 },
+    { text: "Un profesor pide identificar cuál de las siguientes oraciones expresa una acción habitual o rutinaria que ocurre en el presente. La opción que cumple con esta característica temporal es:", options: ["Ella caminó ayer por el parque", "Ella caminará mañana hacia la escuela", "Ella camina todos los días después de comer", "Ella había caminado antes de que lloviera"], correct: 2 },
+    { text: "Al iniciar un cuento, un escritor desea expresar una emoción repentina e intensa, como sorpresa o alegría, sin usar una oración completa. Para lograr este efecto de manera gramaticalmente aceptable, el recurso más apropiado es:", options: ["El punto y coma", "Las comillas", "Una interjección", "Los paréntesis"], correct: 2 },
+    { text: "Un estudiante debe escribir una lista de compras que incluye leche, pan, huevos y queso. Para separar correctamente estos elementos dentro de una misma oración, sin usar conjunciones repetitivas, el signo de puntuación adecuado es:", options: ["Punto y coma", "Coma", "Dos puntos", "Punto"], correct: 1 },
+    { text: "Un crítico literario analiza \"Cien años de soledad\" de Gabriel García Márquez. Observa que en la novela ocurren sucesos extraordinarios narrados con la misma naturalidad que los hechos cotidianos. Este estilo narrativo corresponde al:", options: ["Naturalismo", "Realismo mágico", "Clasicismo", "Romanticismo"], correct: 1 },
+    { text: "En la oración \"El profesor advirtió: 'Estudien todo el capítulo para el examen'\", las comillas cumplen una función específica. En este contexto, su propósito es:", options: ["Indicar una pregunta", "Señalar una cita textual", "Expresar duda", "Enumerar instrucciones"], correct: 1 },
+    { text: "Un narrador relata: \"Ayer compré manzanas, caminé por el parque y saludé a un amigo\". El tiempo verbal predominante en esta narración indica acciones que ya ocurrieron y concluyeron en el pasado. Este tiempo es:", options: ["Presente", "Futuro simple", "Pretérito perfecto simple", "Pretérito pluscuamperfecto"], correct: 2 },
+    { text: "Un maestro dicta las siguientes palabras: \"hielo\", \"huevo\", \"humano\" y \"ueso\". Los alumnos deben identificar cuál está escrita incorrectamente. La palabra que viola la regla ortográfica es:", options: ["hielo", "huevo", "humano", "ueso"], correct: 3 },
+    { text: "Al analizar la oración \"La casa grande tiene una puerta roja\", se identifica el predicado como la parte que expresa lo que se dice del sujeto. En este caso, el predicado completo es:", options: ["La casa grande", "grande", "tiene una puerta roja", "roja"], correct: 2 },
+    { text: "Un lector busca un texto que narre la vida de una persona real, escrita por otra persona, con rigor histórico pero sin ficción. Este tipo de texto corresponde al género de:", options: ["Novela", "Cuento", "Biografía", "Leyenda"], correct: 2 },
+    { text: "En la oración \"Ella estudia mucho para el examen; sin embargo, no logra aprobar\", se utiliza un signo de puntuación para unir dos oraciones relacionadas entre sí sin necesidad de una conjunción. Este signo es:", options: ["La coma (,)", "El punto y coma (;)", "Los dos puntos (:)", "El punto (.)"], correct: 1 }
+];
+
+let respuestasEspanol = {};
+
+function abrirExamenEspanol() {
+    respuestasEspanol = {};
+    const quizBody = document.getElementById('quizBodyEspanol');
+    quizBody.innerHTML = '';
+    
+    preguntasEspanol.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-espanol-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuestaEspanol(${idx}, ${optIdx})">
+                    <input type="radio" name="q${idx}" id="q${idx}_${optIdx}" value="${optIdx}">
+                    <label for="q${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-espanol-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalEspanol').style.display = 'block';
+}
+
+function seleccionarRespuestaEspanol(qIdx, optIdx) {
+    respuestasEspanol[qIdx] = optIdx;
+    const radio = document.getElementById(`q${qIdx}_${optIdx}`);
+    if (radio) radio.checked = true;
+}
+
+function reiniciarExamenEspanol() {
+    respuestasEspanol = {};
+    for (let i = 0; i < preguntasEspanol.length; i++) {
+        const radios = document.querySelectorAll(`input[name="q${i}"]`);
+        radios.forEach(radio => radio.checked = false);
+        const feedback = document.getElementById(`feedback-espanol-${i}`);
+        if (feedback) {
+            feedback.className = 'feedback-modal';
+            feedback.innerHTML = '';
+        }
+    }
+}
+
+function calificarExamenEspanol() {
+    let correctas = 0;
+    const total = preguntasEspanol.length;
+    
+    for (let i = 0; i < total; i++) {
+        const respuestaUser = respuestasEspanol[i];
+        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasEspanol[i].correct);
+        if (esCorrecta) correctas++;
+        
+        const feedbackDiv = document.getElementById(`feedback-espanol-${i}`);
+        const letraCorrecta = String.fromCharCode(97 + preguntasEspanol[i].correct);
+        const textoCorrecto = preguntasEspanol[i].options[preguntasEspanol[i].correct];
+        const textoPregunta = preguntasEspanol[i].text;
+        
+        if (respuestaUser === undefined) {
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `
+                <strong>❌ No respondiste</strong><br>
+                📖 <em>Respuesta correcta:</em> <span style="color: #155724; font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
+            `;
+        } else if (esCorrecta) {
+            feedbackDiv.className = 'feedback-modal correct';
+            feedbackDiv.innerHTML = `
+                <strong>✅ ¡Correcto!</strong><br>
+                ${letraCorrecta}) ${textoCorrecto}
+            `;
+        } else {
+            const letraUser = String.fromCharCode(97 + respuestaUser);
+            const textoUser = preguntasEspanol[i].options[respuestaUser];
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `
+                <strong>❌ Incorrecto</strong><br>
+                Tu respuesta: <span style="color: #721c24;">${letraUser}) ${textoUser}</span><br>
+                📖 <em>Respuesta correcta:</em> <span style="color: #155724; font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
+            `;
+        }
+        
+        // Marcar visualmente la opción correcta en verde (solo si la respuesta fue incorrecta o no respondida)
+        if (respuestaUser !== undefined && !esCorrecta) {
+            const correctRadio = document.getElementById(`q${i}_${preguntasEspanol[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+            // Marcar la respuesta incorrecta del usuario en rojo
+            const userRadio = document.getElementById(`q${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#f8d7da';
+                userRadio.parentElement.style.border = '2px solid #dc3545';
+            }
+        } else if (respuestaUser === undefined) {
+            // Si no respondió, marcar la correcta en verde
+            const correctRadio = document.getElementById(`q${i}_${preguntasEspanol[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else if (esCorrecta) {
+            // Si acertó, marcar su respuesta en verde
+            const userRadio = document.getElementById(`q${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#d4edda';
+                userRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        }
+    }
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const resultModal = document.getElementById('resultModalEspanol');
+    const resultScore = document.getElementById('resultScoreEspanol');
+    const resultDetails = document.getElementById('resultDetailsEspanol');
+    
+    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
+    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
+    
+    let mensaje = '';
+    if (porcentaje >= 90) mensaje = '🎉 ¡Excelente! Dominas el tema.';
+    else if (porcentaje >= 70) mensaje = '📘 ¡Bien! Sigue así.';
+    else if (porcentaje >= 50) mensaje = '📚 Necesitas repasar un poco más.';
+    else mensaje = '⚠️ Estudia más. ¡Tú puedes lograrlo!';
+    
+    resultDetails.innerHTML = mensaje;
+    
+    resultModal.style.display = 'block';
+    document.getElementById('overlayEspanol').style.display = 'block';
+}
+
+function cerrarModalEspanol() {
+    document.getElementById('quizModalEspanol').style.display = 'none';
+}
+
+function cerrarResultadoEspanol() {
+    document.getElementById('resultModalEspanol').style.display = 'none';
+    document.getElementById('overlayEspanol').style.display = 'none';
+}
+
+// Modificar el botón de Español para que abra el examen
+document.addEventListener('DOMContentLoaded', function() {
+    // Buscar el botón de la tarjeta de Español y cambiar su función
+    const botones = document.querySelectorAll('.card-btn');
+    botones.forEach(btn => {
+        if (btn.getAttribute('data-materia') === 'Español') {
+            btn.removeEventListener('click', btn.click);
+            btn.onclick = function(e) {
+                e.preventDefault();
+                abrirExamenEspanol();
+            };
+            btn.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+        }
+    });
+});
+      // ========== CUESTIONARIO DE MATEMÁTICAS (15 PREGUNTAS ESTILO MCAT) ==========
+const preguntasMatematicas = [
+    { text: "Un estudiante va a una papelería y compra un libro de texto que cuesta $85 y un cuaderno de $37. Paga con un billete de $200. Al recibir su cambio, el estudiante quiere verificar si el monto es correcto. ¿Cuánto dinero debe recibir de cambio?", options: ["$122", "$78", "$48", "$68"], correct: 1 },
+    { text: "Una receta de cocina requiere 3/4 de taza de azúcar y 1/2 de taza de harina. El cocinero necesita saber la cantidad total de estos dos ingredientes combinados. ¿Cuál es la suma de 3/4 + 1/2?", options: ["5/4", "4/6", "3/2", "1/4"], correct: 0 },
+    { text: "Un termómetro registra una temperatura de 5°C por la mañana. Durante la tarde, la temperatura desciende hasta -3°C. Un meteorólogo necesita calcular la magnitud del descenso térmico. ¿Cuántos grados Celsius descendió la temperatura?", options: ["2°C", "5°C", "8°C", "3°C"], correct: 2 },
+    { text: "Una persona está ahorrando dinero semanalmente. En la primera semana ahorra $20, en la segunda semana ahorra $40, en la tercera semana ahorra $80. Observa que cada semana duplica la cantidad ahorrada respecto a la semana anterior. Si este patrón de crecimiento se mantiene, ¿cuánto dinero ahorrará en la sexta semana?", options: ["$160", "$320", "$640", "$1280"], correct: 2 },
+    { text: "Un estudiante presenta un examen de 50 preguntas. Al recibir sus resultados, se le informa que contestó correctamente 35 preguntas. Para calcular su calificación como porcentaje, debe convertir el número de aciertos a una fracción de 100. ¿Qué porcentaje del examen contestó correctamente?", options: ["50%", "60%", "70%", "80%"], correct: 2 },
+    { text: "En un juego de mesa, un jugador debe lanzar un dado de seis caras numeradas del 1 al 6. Para ganar un punto extra, necesita obtener un número par. El jugador quiere calcular la probabilidad teórica de que esto ocurra antes de lanzar el dado. ¿Cuál es la probabilidad de obtener un número par al lanzar un dado justo?", options: ["1/6", "2/6", "3/6", "4/6"], correct: 2 },
+    { text: "Un alumno recibe las siguientes calificaciones en cinco materias durante un semestre: 8, 9, 7, 10 y 6. Para conocer su rendimiento promedio, debe calcular la media aritmética de estas cinco calificaciones. ¿Cuál es el valor de la media?", options: ["8.0", "8.5", "9.0", "7.5"], correct: 0 },
+    { text: "Un arquitecto diseña un terreno rectangular que tiene 8 metros de largo y 5 metros de ancho. Necesita calcular el área del terreno para determinar cuántos metros cuadrados de pasto debe comprar. ¿Cuál es el área de este rectángulo?", options: ["13 m²", "26 m²", "40 m²", "80 m²"], correct: 2 },
+    { text: "Un jardinero tiene un jardín cuadrado que mide 6 metros de cada lado. Desea instalar una cerca alrededor de todo el perímetro. Para comprar la cantidad correcta de material, debe calcular el perímetro del cuadrado. ¿Cuál es el perímetro de un cuadrado de 6 metros de lado?", options: ["12 m", "18 m", "24 m", "36 m"], correct: 2 },
+    { text: "Un automóvil realiza un viaje de 120 kilómetros en un tiempo de 2 horas. El conductor quiere conocer su rapidez promedio durante todo el recorrido, expresada en kilómetros por hora. ¿Cuál es la rapidez promedio del automóvil?", options: ["30 km/h", "60 km/h", "90 km/h", "120 km/h"], correct: 1 },
+    { text: "Un estudiante de geometría analiza un triángulo y mide uno de sus ángulos, obteniendo exactamente 90°. Con esta información, el estudiante quiere clasificar correctamente el triángulo según sus ángulos internos. ¿Cómo se clasifica un triángulo que tiene un ángulo de 90°?", options: ["Equilátero", "Isósceles", "Rectángulo", "Acutángulo"], correct: 2 },
+    { text: "En una expresión algebraica, se asignan los valores x = 3 y y = 5. Un estudiante debe evaluar la expresión 2x + 3y sustituyendo estos valores. ¿Cuál es el resultado numérico de 2x + 3y cuando x = 3 y y = 5?", options: ["11", "19", "21", "23"], correct: 2 },
+    { text: "Una caja tiene forma de prisma rectangular con las siguientes dimensiones: 4 cm de largo, 3 cm de ancho y 2 cm de alto. Un estudiante necesita calcular el volumen de la caja para saber cuánto espacio ocupa. ¿Cuál es el volumen de esta caja?", options: ["9 cm³", "12 cm³", "24 cm³", "48 cm³"], correct: 2 },
+    { text: "Un estudiante resuelve la ecuación lineal 3x + 5 = 20 como parte de su tarea de álgebra. Para encontrar el valor de la incógnita x, debe despejarla aplicando operaciones inversas. ¿Cuál es el valor de x que satisface la ecuación 3x + 5 = 20?", options: ["x = 3", "x = 4", "x = 5", "x = 6"], correct: 2 },
+    { text: "En una clase de matemáticas, el profesor escribe en el pizarrón la expresión 2⁴ y pregunta a los alumnos cuál es su valor. La expresión representa una potencia donde la base es 2 y el exponente es 4. ¿Cuál es el resultado de 2⁴?", options: ["4", "6", "8", "16"], correct: 3 }
+];
+
+let respuestasMatematicas = {};
+
+function abrirExamenMatematicas() {
+    respuestasMatematicas = {};
+    const quizBody = document.getElementById('quizBodyMatematicas');
+    quizBody.innerHTML = '';
+    
+    preguntasMatematicas.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-mate-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuestaMatematicas(${idx}, ${optIdx})">
+                    <input type="radio" name="mate${idx}" id="mate${idx}_${optIdx}" value="${optIdx}">
+                    <label for="mate${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-mate-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalMatematicas').style.display = 'block';
+}
+
+function seleccionarRespuestaMatematicas(qIdx, optIdx) {
+    respuestasMatematicas[qIdx] = optIdx;
+    const radio = document.getElementById(`mate${qIdx}_${optIdx}`);
+    if (radio) radio.checked = true;
+}
+
+function reiniciarExamenMatematicas() {
+    respuestasMatematicas = {};
+    for (let i = 0; i < preguntasMatematicas.length; i++) {
+        const radios = document.querySelectorAll(`input[name="mate${i}"]`);
+        radios.forEach(radio => radio.checked = false);
+        const feedback = document.getElementById(`feedback-mate-${i}`);
+        if (feedback) {
+            feedback.className = 'feedback-modal';
+            feedback.innerHTML = '';
+        }
+        // Limpiar estilos de las opciones
+        const optionsDivs = document.querySelectorAll(`#q-mate-${i} .option-modal`);
+        optionsDivs.forEach(opt => {
+            opt.style.backgroundColor = '';
+            opt.style.border = '';
+        });
+    }
+}
+
+function calificarExamenMatematicas() {
+    let correctas = 0;
+    const total = preguntasMatematicas.length;
+    
+    for (let i = 0; i < total; i++) {
+        const respuestaUser = respuestasMatematicas[i];
+        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasMatematicas[i].correct);
+        if (esCorrecta) correctas++;
+        
+        const feedbackDiv = document.getElementById(`feedback-mate-${i}`);
+        const letraCorrecta = String.fromCharCode(97 + preguntasMatematicas[i].correct);
+        const textoCorrecto = preguntasMatematicas[i].options[preguntasMatematicas[i].correct];
+        
+        if (respuestaUser === undefined) {
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `
+                <strong>❌ No respondiste</strong><br>
+                📖 <em>Respuesta correcta:</em> <span style="color: #155724; font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
+            `;
+            // Marcar la correcta en verde
+            const correctRadio = document.getElementById(`mate${i}_${preguntasMatematicas[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else if (esCorrecta) {
+            feedbackDiv.className = 'feedback-modal correct';
+            feedbackDiv.innerHTML = `
+                <strong>✅ ¡Correcto!</strong><br>
+                ${letraCorrecta}) ${textoCorrecto}
+            `;
+            // Marcar su respuesta en verde
+            const userRadio = document.getElementById(`mate${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#d4edda';
+                userRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else {
+            const letraUser = String.fromCharCode(97 + respuestaUser);
+            const textoUser = preguntasMatematicas[i].options[respuestaUser];
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `
+                <strong>❌ Incorrecto</strong><br>
+                Tu respuesta: <span style="color: #721c24;">${letraUser}) ${textoUser}</span><br>
+                📖 <em>Respuesta correcta:</em> <span style="color: #155724; font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
+            `;
+            // Marcar la correcta en verde
+            const correctRadio = document.getElementById(`mate${i}_${preguntasMatematicas[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+            // Marcar la respuesta incorrecta del usuario en rojo
+            const userRadio = document.getElementById(`mate${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#f8d7da';
+                userRadio.parentElement.style.border = '2px solid #dc3545';
+            }
+        }
+    }
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const resultModal = document.getElementById('resultModalEspanol');
+    const resultScore = document.getElementById('resultScoreEspanol');
+    const resultDetails = document.getElementById('resultDetailsEspanol');
+    
+    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
+    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
+    
+    let mensaje = '';
+    if (porcentaje >= 90) mensaje = '🎉 ¡Excelente! Dominas Matemáticas.';
+    else if (porcentaje >= 70) mensaje = '📘 ¡Bien! Sigue practicando.';
+    else if (porcentaje >= 50) mensaje = '📚 Necesitas repasar más.';
+    else mensaje = '⚠️ Estudia más. ¡Tú puedes lograrlo!';
+    
+    resultDetails.innerHTML = mensaje;
+    
+    resultModal.style.display = 'block';
+    document.getElementById('overlayEspanol').style.display = 'block';
+}
+
+function cerrarModalMatematicas() {
+    document.getElementById('quizModalMatematicas').style.display = 'none';
+}
+
+// Modificar el botón de Matemáticas para que abra su examen
+document.addEventListener('DOMContentLoaded', function() {
+    const botones = document.querySelectorAll('.card-btn');
+    botones.forEach(btn => {
+        if (btn.getAttribute('data-materia') === 'Matemáticas') {
+            btn.onclick = function(e) {
+                e.preventDefault();
+                abrirExamenMatematicas();
+            };
+            btn.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+        }
+    });
+});
+     // ========== PREGUNTAS DE FÍSICA (contexto completo estilo MCAT) ==========
+const preguntasFisica = [
+    { text: "Un automóvil se desplaza en línea recta sobre una carretera. En el tiempo t = 0 segundos, su posición es 10 metros medida desde un punto de referencia. En el tiempo t = 5 segundos, su posición es 50 metros. Un estudiante debe calcular la velocidad constante del automóvil durante este intervalo, suponiendo que el movimiento es uniforme. ¿Cuál es la velocidad del automóvil?", options: ["4 m/s", "6 m/s", "8 m/s", "10 m/s"], correct: 2 },
+    { text: "En un laboratorio de física, se colocan una pluma de ave y una bola de acero maciza dentro de una cámara de vacío. Se dejan caer ambos objetos desde la misma altura exacta al mismo tiempo. Según las conclusiones demostradas por Galileo Galilei sobre la caída libre de los cuerpos, ¿qué observará el experimentador en esta situación controlada?", options: ["La bola de acero caerá más rápido porque tiene mayor masa", "La pluma caerá más rápido porque ofrece menos resistencia al aire", "Ambos objetos caerán al mismo tiempo y tocarán el suelo simultáneamente", "La pluma flotará en el vacío sin caer debido a su baja densidad"], correct: 2 },
+    { text: "Un ciclista viaja en su bicicleta por una avenida plana a una velocidad inicial de 10 metros por segundo. De repente, el ciclista aplica los frenos y, después de 4 segundos, la velocidad de la bicicleta se ha reducido a 2 metros por segundo. Un estudiante debe calcular la aceleración promedio durante este intervalo, considerando la dirección del movimiento como positiva. ¿Cuál es la aceleración promedio de la bicicleta?", options: ["2 m/s²", "-2 m/s²", "8 m/s²", "-8 m/s²"], correct: 1 },
+    { text: "Un libro de texto permanece en reposo sobre una mesa horizontal. Ninguna fuerza externa horizontal actúa sobre él en ese momento. De repente, una persona empuja el libro suavemente con un dedo y este comienza a moverse en la dirección del empuje. Este comportamiento ejemplifica una de las tres leyes del movimiento formuladas por Isaac Newton. ¿Cuál de las siguientes leyes de Newton explica por qué el libro permaneció en reposo hasta que una fuerza externa actuó sobre él?", options: ["Primera ley de Newton (ley de la inercia)", "Segunda ley de Newton (ley de fuerza y aceleración)", "Tercera ley de Newton (ley de acción y reacción)", "Ley de gravitación universal"], correct: 0 },
+    { text: "Una patineta se desplaza sobre una superficie de concreto rugoso. Después de que la persona que la impulsaba deja de patear el suelo, la patineta continúa moviéndose por un tramo corto pero eventualmente se detiene por completo. Un estudiante debe identificar la causa física principal de esta desaceleración progresiva hasta llegar al reposo. ¿Qué fuerza es principalmente responsable de que la patineta se detenga?", options: ["La inercia del objeto en movimiento", "La fuerza de fricción entre las ruedas y el pavimento", "La fuerza gravitacional que ejerce la Tierra", "La masa del objeto en movimiento"], correct: 1 },
+    { text: "Un carrito de montaña rusa asciende lentamente hasta la cima más alta del recorrido mediante un mecanismo de cadena. En ese punto, justo antes de iniciar el descenso por la caída principal, el carrito tiene una altura máxima y su velocidad es casi nula. Un estudiante de física debe identificar qué tipo de energía predomina en el carrito en ese instante específico del recorrido. ¿Qué forma de energía es predominante en la cima de la montaña rusa?", options: ["Energía cinética", "Energía potencial gravitatoria", "Energía térmica", "Energía eléctrica"], correct: 1 },
+    { text: "Un estudiante realiza un experimento con dos imanes de barra. Toma los dos imanes y acerca sus polos norte uno contra el otro. Al acercarlos, observa que los imanes se repelen mutuamente con una fuerza que se siente incluso antes de que hagan contacto directo. Este fenómeno evidencia la existencia de un tipo específico de fuerza que actúa a distancia. ¿Qué tipo de fuerza es responsable de la repulsión entre los polos norte de dos imanes?", options: ["Fuerza gravitacional", "Fuerza nuclear fuerte", "Fuerza magnética", "Fuerza eléctrica estática"], correct: 2 },
+    { text: "Una prensa hidráulica es un dispositivo que consta de dos émbolos de diferentes áreas conectados entre sí por un líquido confinado, generalmente aceite. Cuando se aplica una fuerza pequeña en el émbolo de área menor, se genera una fuerza mucho mayor en el émbolo de área mayor. Un ingeniero debe explicar el principio físico que permite esta multiplicación de la fuerza. ¿Qué principio de la hidrostática explica el funcionamiento de una prensa hidráulica?", options: ["Principio de Arquímedes", "Principio de Pascal", "Principio de Bernoulli", "Ley de Boyle-Mariotte"], correct: 1 },
+    { text: "Un estudiante introduce un termómetro de mercurio o alcohol dentro de un recipiente que contiene agua caliente recién hervida. Observa que la columna de líquido dentro del termómetro se expande y asciende por el capilar. El termómetro está diseñado para medir una magnitud física relacionada directamente con el movimiento promedio de las partículas del agua. ¿Qué magnitud física está midiendo el termómetro en este experimento?", options: ["La energía total del sistema", "La energía cinética promedio de las partículas (temperatura)", "La presión ejercida por el agua sobre las paredes", "La densidad del líquido contenido"], correct: 1 },
+    { text: "Un lápiz se coloca dentro de un vaso transparente completamente lleno de agua. Cuando se observa el lápiz desde fuera del vaso, mirando a través de la pared de vidrio y el agua, el lápiz parece estar quebrado o desplazado en la superficie donde el agua hace contacto con el aire. Este fenómeno ocurre porque la luz cambia su dirección de propagación al pasar de un medio a otro con diferente densidad. ¿Cómo se denomina este fenómeno óptico?", options: ["Reflexión especular", "Refracción de la luz", "Difracción de ondas", "Absorción selectiva"], correct: 1 },
+    { text: "Para construir un electroimán casero, un estudiante enrolla un alambre de cobre esmaltado alrededor de un clavo de hierro grande y conecta los extremos del alambre a los bornes de una batería de 9 voltios. Al cerrar el circuito eléctrico, el clavo de hierro adquiere la capacidad de atraer pequeños objetos metálicos como clips o alfileres. ¿Qué elemento es indispensable para que el electroimán funcione correctamente?", options: ["Un imán permanente colocado dentro del clavo", "Una corriente eléctrica circulando por el alambre", "Un material aislante entre el alambre y el clavo", "Un capacitor conectado en paralelo con la batería"], correct: 1 },
+    { text: "En el modelo atómico básico aceptado actualmente, se describen tres partículas subatómicas fundamentales que componen los átomos: una con carga eléctrica positiva, una con carga eléctrica negativa y una sin carga eléctrica. Un estudiante debe identificar correctamente cuál de estas partículas posee carga eléctrica negativa. ¿Cuál es la partícula subatómica con carga negativa?", options: ["Protón", "Neutrón", "Electrón", "Positrón"], correct: 2 },
+    { text: "Un electricista necesita seleccionar un material adecuado para fabricar cables conductores que permitan el flujo eficiente de electrones en una instalación eléctrica residencial. Debe elegir entre varios materiales disponibles en el almacén: plástico, madera, cobre y vidrio. Debe considerar principalmente la conductividad eléctrica de cada material. ¿Cuál de los siguientes materiales es el más adecuado para conducir electricidad?", options: ["Plástico", "Madera", "Cobre", "Vidrio"], correct: 2 },
+    { text: "La luz visible que percibe el ojo humano, las ondas de radio que transmiten señales de televisión y telefonía, los rayos X utilizados en radiología médica y las microondas que calientan los alimentos son ejemplos de un mismo tipo de onda. Un estudiante de física debe clasificar correctamente estas ondas según su naturaleza física. ¿Qué tipo de ondas son la luz visible, las ondas de radio, los rayos X y las microondas?", options: ["Ondas mecánicas", "Ondas longitudinales", "Ondas electromagnéticas", "Ondas estacionarias"], correct: 2 },
+    { text: "Un estudiante aplica la misma fuerza constante a dos objetos de diferente masa: una pelota de ping pong (masa muy pequeña) y una bola de boliche (masa muy grande). Segunda la segunda ley del movimiento de Newton, que se expresa matemáticamente como F = m × a, el estudiante quiere predecir cuál de los dos objetos experimentará una mayor aceleración como resultado de la misma fuerza aplicada. ¿Cuál de los siguientes enunciados es correcto según la segunda ley de Newton?", options: ["La bola de boliche tendrá mayor aceleración porque tiene mayor masa", "La pelota de ping pong tendrá mayor aceleración porque tiene menor masa", "Ambos objetos tendrán exactamente la misma aceleración porque la fuerza es igual", "La aceleración no depende de la masa, solo de la velocidad inicial del objeto"], correct: 1 }
+];
+
+// ========== PREGUNTAS DE QUÍMICA (contexto completo estilo MCAT) ==========
+const preguntasQuimica = [
+    { text: "Una persona realiza un experimento casero: disuelve una cucharada completa de sal de mesa (cloruro de sodio, NaCl) en un vaso con agua a temperatura ambiente y revuelve vigorosamente hasta que la sal ya no es visible a simple vista en el fondo o en las paredes del vaso. El resultado es una mezcla líquida de aspecto uniforme en la que no se distinguen fases separadas a simple vista. Un estudiante de química debe clasificar correctamente este tipo de mezcla. ¿Cómo se denomina una mezcla con composición uniforme y apariencia homogénea?", options: ["Mezcla heterogénea", "Mezcla homogénea (disolución)", "Suspensión coloidal", "Emulsión inestable"], correct: 1 },
+    { text: "Un estudiante de laboratorio mezcla arena de playa fina con agua del grifo en un recipiente de vidrio transparente. Después de agitar la mezcla y dejarla reposar durante unos segundos, observa que la arena se deposita completamente en el fondo del recipiente mientras que el agua queda en la parte superior, formando dos fases claramente distinguibles. Para separar la arena del agua y recuperar ambos componentes, el estudiante puede utilizar un método sencillo basado en la diferencia de tamaño de partículas o densidad. ¿Cuál de los siguientes métodos de separación de mezclas es el más adecuado para separar arena y agua?", options: ["Destilación simple", "Filtración con papel filtro", "Decantación o vertido del líquido", "Cristalización fraccionada"], correct: 1 },
+    { text: "En la tabla periódica de los elementos químicos, cada elemento se representa con un símbolo de una o dos letras, generalmente derivado de su nombre en latín o en un idioma moderno. Un estudiante debe recordar el símbolo químico correcto del hierro, un metal de transición ampliamente utilizado en la industria de la construcción, la manufactura y la ingeniería. El hierro es uno de los elementos más abundantes en la corteza terrestre. ¿Cuál es el símbolo químico correcto del elemento hierro?", options: ["H (Hidrógeno)", "He (Helio)", "Fe (Ferrum)", "Ir (Iridio)"], correct: 2 },
+    { text: "En la industria alimentaria moderna, es común añadir sustancias químicas a los productos envasados para prolongar su vida útil en los anaqueles de los supermercados. Estas sustancias ayudan a retardar el deterioro causado por microorganismos como bacterias y hongos, así como por reacciones químicas no deseadas como la oxidación de las grasas. Un técnico en alimentos debe explicar la función principal de estos aditivos a un grupo de consumidores. ¿Cuál es la función principal de los conservadores alimenticios?", options: ["Acelerar las reacciones químicas para que los alimentos maduren más rápido", "Retrasar el deterioro y prolongar la vida útil de los alimentos", "Cambiar el sabor natural de los alimentos para hacerlos más atractivos", "Aumentar la temperatura de cocción necesaria para preparar el alimento"], correct: 1 },
+    { text: "Una batería eléctrica común, como las baterías AA o AAA que se usan en controles remotos y juguetes, genera corriente eléctrica al convertir energía química almacenada en energía eléctrica utilizable. Dentro de la batería ocurren reacciones químicas en las que una sustancia se oxida (pierde electrones) y otra sustancia se reduce (gana electrones) simultáneamente. Un estudiante de química debe identificar el tipo general de reacción química que ocurre en el interior de una batería. ¿Cómo se denominan las reacciones químicas en las que hay transferencia neta de electrones entre las especies que participan?", options: ["Reacciones de neutralización ácido-base", "Reacciones redox (oxidación-reducción)", "Reacciones de síntesis o combinación", "Reacciones de descomposición térmica"], correct: 1 },
+    { text: "Una persona experimenta acidez estomacal después de una comida abundante y pesada. Para aliviar el malestar, toma un antiácido de venta libre que contiene hidróxido de magnesio [Mg(OH)₂] o hidróxido de aluminio [Al(OH)₃]. Estos compuestos básicos reaccionan químicamente con el exceso de ácido clorhídrico (HCl) presente en el estómago. Un estudiante de química debe identificar el tipo específico de reacción que ocurre entre un ácido (HCl) y una base (hidróxido metálico). ¿Cómo se denomina la reacción química entre un ácido y una base?", options: ["Reacción de oxidación", "Reacción de reducción", "Reacción de neutralización", "Reacción de combustión"], correct: 2 },
+    { text: "En un laboratorio de química analítica, se mide el pH de una solución desconocida utilizando un peachímetro calibrado. Se obtiene un valor de pH = 4. El pH es una escala logarítmica que indica la acidez o basicidad de una solución acuosa, y fue propuesta por el químico danés Søren Sørensen. Un estudiante debe recordar qué magnitud química mide específicamente la escala de pH. ¿Qué mide exactamente la escala de pH en una solución acuosa?", options: ["La concentración de iones hidrógeno (H⁺) o iones hidronio (H₃O⁺) en la solución", "La temperatura de la solución en grados Celsius", "La densidad de la solución en gramos por mililitro", "La conductividad eléctrica de la solución en siemens"], correct: 0 },
+    { text: "La fórmula química del agua es una de las más conocidas y básicas en toda la química. Cada molécula de agua está compuesta por dos átomos del elemento hidrógeno y un átomo del elemento oxígeno, unidos mediante enlaces covalentes polares. Un estudiante debe escribir correctamente esta fórmula química, respetando la notación estándar de subíndices. ¿Cuál es la fórmula química correcta del agua?", options: ["H₂O₂ (peróxido de hidrógeno)", "H₂O (agua)", "HO (radical hidroxilo)", "H₃O⁺ (ion hidronio)"], correct: 1 },
+    { text: "En la combustión completa de un hidrocarburo, como el gas metano (CH₄) que se usa en estufas domésticas o la gasolina que se quema en los motores de automóviles, se producen dos productos principales como resultado de la reacción con oxígeno del aire. Un estudiante de química debe identificar qué gas inorgánico se libera a la atmósfera durante este proceso de combustión completa, además de la formación de agua (H₂O). ¿Cuál de los siguientes gases se produce como producto principal en una reacción de combustión completa?", options: ["Oxígeno gaseoso (O₂)", "Hidrógeno gaseoso (H₂)", "Dióxido de carbono (CO₂)", "Nitrógeno gaseoso (N₂)"], correct: 2 },
+    { text: "En el modelo atómico actual aceptado por la comunidad científica, el átomo se compone de un núcleo central extremadamente pequeño y denso, rodeado por una nube de electrones que se mueven en orbitales. Un estudiante de química debe recordar qué partículas subatómicas se encuentran específicamente dentro del núcleo atómico, ya que esta es una pregunta frecuente en exámenes de química básica. ¿Cuál de las siguientes opciones describe correctamente la composición del núcleo atómico?", options: ["Solo electrones en movimiento", "Protones (carga positiva) y neutrones (sin carga)", "Electrones y protones juntos", "Solo neutrones, sin protones"], correct: 1 },
+    { text: "Antoine Laurent de Lavoisier, considerado el padre de la química moderna por sus numerosas contribuciones a esta ciencia, realizó experimentos meticulosos que lo llevaron a formular un principio fundamental de la química. Este principio establece que en una reacción química que ocurre dentro de un sistema cerrado (sin intercambio de materia con el exterior), la masa total de los reactivos es igual a la masa total de los productos. Un estudiante debe recordar este principio fundamental. ¿Qué establece la ley de conservación de la masa de Lavoisier?", options: ["La masa puede crearse a partir de energía según E = mc²", "La masa puede destruirse completamente en reacciones nucleares", "La masa no se crea ni se destruye, solo se transforma", "La masa varía significativamente según la temperatura de la reacción"], correct: 2 },
+    { text: "En una molécula de agua (H₂O), los dos átomos de hidrógeno y el átomo de oxígeno comparten pares de electrones para formar la estructura molecular estable. Cada enlace se forma cuando un átomo aporta un electrón y otro átomo aporta otro electrón, formando un par compartido. Un estudiante debe identificar el tipo de enlace químico que implica exactamente la compartición de uno o más pares de electrones entre dos átomos. ¿Cómo se denomina este tipo de enlace químico?", options: ["Enlace iónico (transferencia de electrones)", "Enlace covalente (compartición de electrones)", "Enlace metálico (mar de electrones deslocalizados)", "Enlace por puente de hidrógeno (interacción intermolecular)"], correct: 1 },
+    { text: "En una reacción química observada en el laboratorio, se coloca una lámina de zinc metálico (Zn) dentro de una solución de sulfato de cobre (CuSO₄). Con el paso del tiempo, se observa que el zinc pierde masa y se disuelve formando iones zinc (Zn²⁺) en solución, mientras que el cobre metálico se deposita sobre la superficie del zinc. El zinc ha perdido electrones en este proceso. Un estudiante debe identificar el nombre del proceso químico en el que una especie química pierde electrones. ¿Cómo se denomina el proceso químico en el que una sustancia pierde electrones?", options: ["Reducción (ganancia de electrones)", "Oxidación (pérdida de electrones)", "Neutralización (reacción ácido-base)", "Precipitación (formación de sólido)"], correct: 1 },
+    { text: "Dmitri Ivánovich Mendeleiev, un químico ruso del siglo XIX, es famoso por haber desarrollado la primera versión ampliamente aceptada de la tabla periódica de los elementos. Mendeleiev organizó los elementos conocidos en su época basándose en sus propiedades químicas periódicas y en una propiedad física específica que podía medirse experimentalmente. Su tabla fue tan precisa que permitió predecir la existencia y propiedades de elementos aún no descubiertos en ese momento. ¿Qué propiedad utilizó Mendeleiev como criterio principal para ordenar los elementos en su tabla periódica?", options: ["El color característico de cada elemento", "La masa atómica creciente de los elementos", "La conductividad eléctrica del elemento", "El punto de ebullición del elemento"], correct: 1 },
+    { text: "En una reacción química industrial a gran escala, los ingenieros químicos añaden una pequeña cantidad de una sustancia especial que acelera significativamente la velocidad de la reacción sin consumirse ni transformarse permanentemente en el proceso. Al finalizar la reacción principal, esta sustancia se recupera químicamente inalterada y puede reutilizarse. Un estudiante de química debe identificar el término técnico correcto para esta sustancia que acelera reacciones sin consumirse. ¿Qué término recibe una sustancia que acelera una reacción química sin consumirse en ella?", options: ["Reactivo limitante (el que se agota primero)", "Producto intermedio (aparece y luego se consume)", "Catalizador (acelera sin consumirse)", "Inhibidor (retarda la velocidad de reacción)"], correct: 2 }
+];
+
+// ========== PREGUNTAS DE BIOLOGÍA (contexto completo estilo MCAT) ==========
+const preguntasBiologia = [
+    { text: "Un biólogo está estudiando las características que definen a los seres vivos y los distinguen claramente de la materia inanimada o de los objetos inertes. Durante su investigación, observa una planta que crece y se desarrolla, un perro que se reproduce y tiene cachorros, y una bacteria que se mueve hacia una fuente de nutrientes en respuesta a un estímulo químico. Todas estas observaciones apuntan a una o varias características universales de los organismos vivos. ¿Cuál de las siguientes opciones describe una característica común a todos los seres vivos?", options: ["Capacidad de volar o desplazarse por el aire", "Capacidad de reproducirse y transmitir información genética", "Capacidad de vivir exclusivamente en ambientes acuáticos", "Capacidad de cambiar de color para camuflarse"], correct: 1 },
+    { text: "México es reconocido mundialmente por organizaciones ambientales como un país megadiverso. Un ecólogo debe explicar a un grupo de estudiantes las razones por las cuales esta nación alberga una cantidad tan impresionante de especies de plantas, animales, hongos y microorganismos. Entre los factores que contribuyen a esta enorme diversidad biológica se encuentra la gran variedad de ecosistemas presentes en su territorio, que van desde selvas húmedas hasta desiertos áridos. ¿Por qué se considera a México un país megadiverso?", options: ["Por su gran extensión territorial en América del Norte", "Por su gran variedad de ecosistemas, climas y topografías", "Por su alta densidad de población humana", "Por su desarrollo tecnológico e industrial avanzado"], correct: 1 },
+    { text: "Charles Robert Darwin, naturalista británico del siglo XIX, publicó en 1859 su obra fundamental 'El origen de las especies' en la que propuso un mecanismo para explicar cómo las especies biológicas cambian y se adaptan a lo largo del tiempo generacional. Este mecanismo actúa sobre la variación natural que existe entre los individuos de una misma población, favoreciendo aquellos rasgos hereditarios que confieren ventajas para la supervivencia y reproducción en un ambiente determinado. ¿Cuál es el nombre del mecanismo evolutivo propuesto por Charles Darwin?", options: ["Generación espontánea (origen de la vida a partir de materia inerte)", "Herencia de caracteres adquiridos (lamarckismo)", "Selección natural (supervivencia del más apto)", "Equilibrio puntuado (cambios rápidos seguidos de estabilidad)"], correct: 2 },
+    { text: "En una célula eucariota típica, como una neurona del sistema nervioso o una célula hepática del hígado, existe una estructura limitada por una doble membrana que contiene la totalidad del material genético de la célula (el ADN) y que regula todas las actividades celulares, incluyendo el crecimiento, el metabolismo y la reproducción celular. Un estudiante de biología celular debe identificar correctamente esta estructura, que actúa como el centro de control o 'cerebro' de la célula. ¿Cuál es la estructura celular que funciona como centro de control que contiene el ADN?", options: ["Mitocondria (central energética)", "Núcleo celular (contiene el material genético)", "Membrana plasmática (barrera selectiva)", "Citoplasma (medio interno)"], correct: 1 },
+    { text: "Cuando un virus patógeno o una bacteria dañina logra ingresar al cuerpo humano, el sistema inmunológico responde rápidamente produciendo proteínas especializadas llamadas anticuerpos o inmunoglobulinas. Estas proteínas circulan por la sangre y se unen específicamente a los antígenos del invasor para neutralizarlo o marcarlo para su destrucción. Los anticuerpos son fabricados por un tipo específico de glóbulo blanco (leucocito) que madura en la médula ósea. Un estudiante de medicina debe recordar qué célula del sistema inmune es la responsable directa de la producción de anticuerpos. ¿Qué tipo de célula produce anticuerpos en el cuerpo humano?", options: ["Glóbulo rojo (eritrocito, transporta oxígeno)", "Neurona (célula nerviosa, transmite impulsos)", "Linfocito B (célula B, produce anticuerpos)", "Plaqueta (trombocito, participa en coagulación)"], correct: 2 },
+    { text: "En un ecosistema terrestre como un bosque o una pradera, las plantas verdes realizan un proceso fisiológico fundamental mediante el cual convierten la energía luminosa procedente del Sol en energía química almacenada en forma de moléculas orgánicas como la glucosa (C₆H₁₂O₆). Durante este proceso, las plantas también toman dióxido de carbono (CO₂) del aire y liberan oxígeno (O₂) como subproducto. Un estudiante de biología debe identificar correctamente este proceso vital exclusivo de los organismos fotosintéticos. ¿Cómo se denomina el proceso mediante el cual las plantas producen su propio alimento utilizando la energía de la luz solar?", options: ["Respiración celular (obtención de ATP a partir de glucosa)", "Digestión (descomposición de alimentos en nutrientes)", "Fotosíntesis (síntesis de glucosa a partir de CO₂ y H₂O con luz)", "Fermentación (producción de energía sin oxígeno)"], correct: 2 },
+    { text: "En una cadena alimentaria o trófica, los organismos se clasifican en diferentes niveles según su fuente principal de alimento y su posición en el flujo de energía. Los animales herbívoros, como las vacas, los conejos o los saltamontes, se alimentan directamente de plantas y otros productores primarios. Un ecólogo debe identificar correctamente el término técnico que designa a los organismos que ocupan este nivel trófico. ¿Cómo se denomina correctamente a un organismo que se alimenta directamente de productores primarios (plantas) en una cadena alimentaria?", options: ["Productor primario (como las plantas)", "Consumidor primario o herbívoro", "Consumidor secundario o carnívoro", "Descomponedor o saprófito"], correct: 1 },
+    { text: "Dentro de las células eucariotas, existe un orgánulo con doble membrana que es conocido popularmente como la 'central energética' o 'central eléctrica' de la célula. Esto se debe a que es el sitio principal donde se produce la mayor parte del ATP (trifosfato de adenosina), que es la molécula energética universal utilizada por la célula para realizar todos sus procesos metabólicos y funciones vitales. Un estudiante de biología debe identificar correctamente este orgánulo. ¿Cuál de los siguientes orgánulos es el principal productor de ATP en las células eucariotas?", options: ["Núcleo (contiene el ADN, dirige la célula)", "Ribosoma (sintetiza proteínas)", "Mitocondria (realiza respiración celular y produce ATP)", "Lisosoma (digestión celular)"], correct: 2 },
+    { text: "El cuerpo humano está organizado en varios sistemas de órganos que trabajan de manera coordinada para mantener la homeostasis o equilibrio interno. Uno de estos sistemas es el responsable del intercambio de gases esenciales con el ambiente externo: toma oxígeno (O₂) del aire inspirado y lo transfiere a la sangre, y simultáneamente elimina dióxido de carbono (CO₂) de la sangre para ser expulsado al aire espirado. Un estudiante de anatomía básica debe identificar el sistema y el órgano principal involucrados en este proceso de intercambio gaseoso. ¿Qué órgano es el principal responsable del intercambio de gases oxígeno-dioxido de carbono en el cuerpo humano?", options: ["Corazón (bombea sangre, no realiza intercambio de gases)", "Estómago (digiere alimentos, absorbe nutrientes)", "Pulmones (realizan la hematosis o intercambio de gases)", "Riñones (filtran sangre, producen orina)"], correct: 2 },
+    { text: "Una nutricionista está asesorando a un paciente adulto mayor sobre cómo mantener sus huesos fuertes y prevenir el desarrollo de osteoporosis, una enfermedad que causa fragilidad ósea y aumento del riesgo de fracturas. La profesional recomienda consumir alimentos ricos en un mineral específico que es fundamental para la formación, el mantenimiento y la estructura del tejido óseo, así como para la transmisión nerviosa y la contracción muscular. ¿Qué mineral inorgánico es esencial para la salud de los huesos y los dientes?", options: ["Hierro (Fe, esencial para hemoglobina)", "Calcio (Ca, principal componente de huesos y dientes)", "Zinc (Zn, importante para sistema inmune)", "Magnesio (Mg, necesario para muchas enzimas)"], correct: 1 },
+    { text: "Un médico está informando a un paciente fumador sobre los múltiples riesgos para la salud asociados con el consumo de tabaco. El médico explica que fumar cigarrillos no solo afecta negativamente a los pulmones, sino que también está fuertemente relacionado con el desarrollo de diversos tipos de cáncer, enfermedades cardiovasculares como infartos, y enfermedades respiratorias crónicas como la EPOC (enfermedad pulmonar obstructiva crónica). Un estudiante de salud pública debe recordar una enfermedad específica cuya principal causa prevenible es el tabaquismo. ¿Cuál de las siguientes enfermedades está fuertemente y directamente asociada al tabaquismo como principal factor de riesgo prevenible?", options: ["Diabetes mellitus tipo 2 (más asociada a obesidad)", "Cáncer de pulmón (altamente asociado al tabaco)", "Anemia ferropénica (asociada a deficiencia de hierro)", "Gripe estacional (causada por virus, no por tabaco)"], correct: 1 },
+    { text: "Durante el proceso de la fotosíntesis que ocurre en los cloroplastos de las células vegetales, las plantas absorben dióxido de carbono (CO₂) del aire a través de los estomas de las hojas y liberan un gas diferente como subproducto de este proceso metabólico. Este gas liberado es esencial para la respiración aeróbica de la mayoría de los seres vivos del planeta, incluyendo los seres humanos y otros animales. Un estudiante de ecología debe identificar este gas liberado como subproducto de la fotosíntesis. ¿Qué gas liberan las plantas a la atmósfera como subproducto de la fotosíntesis?", options: ["Dióxido de carbono (CO₂, lo absorben, no lo liberan)", "Oxígeno (O₂, se libera durante la fotosíntesis)", "Nitrógeno (N₂, no participa en fotosíntesis)", "Hidrógeno (H₂, no se libera en este proceso)"], correct: 1 },
+    { text: "En el estudio de la biología reproductiva, existen dos modos fundamentales de reproducción en los seres vivos. Uno de ellos implica la combinación y fusión del material genético proveniente de dos progenitores diferentes (generalmente un gameto masculino y uno femenino), lo que genera descendencia genéticamente diversa y única. El otro modo produce descendencia genéticamente idéntica al progenitor original sin fusión de células sexuales. Un estudiante debe identificar el tipo de reproducción que implica la fusión de gametos de dos padres diferentes para producir descendencia. ¿Cómo se denomina la reproducción que combina material genético de dos individuos progenitores?", options: ["Reproducción asexual (un solo progenitor, descendencia clonal)", "Reproducción sexual (dos progenitores, descendencia genéticamente diversa)", "Mitosis (división celular para crecimiento, no es reproducción)", "Gemación (tipo de reproducción asexual en levaduras)"], correct: 1 },
+    { text: "En las últimas décadas, la concentración atmosférica de dióxido de carbono (CO₂) ha aumentado significativamente debido a actividades humanas como la quema masiva de combustibles fósiles (carbón, petróleo, gas natural) y la deforestación extensiva de bosques y selvas. Este gas, junto con otros como el metano (CH₄) y el vapor de agua (H₂O), contribuye a un fenómeno natural pero exacerbado que eleva la temperatura promedio global del planeta, causando el cambio climático. Un estudiante de ciencias ambientales debe identificar correctamente este fenómeno de calentamiento global. ¿Cómo se denomina el fenómeno por el cual ciertos gases atmosféricos atrapan parte del calor que la Tierra irradia hacia el espacio?", options: ["Efecto invernadero (atrapamiento de calor por gases como CO₂)", "Lluvia ácida (precipitación con pH bajo por SO₂ y NOx)", "Agujero de ozono (adelgazamiento de capa de ozono)", "Inversión térmica (fenómeno meteorológico local)"], correct: 0 },
+    { text: "La salud reproductiva es un concepto integral adoptado por la Organización Mundial de la Salud (OMS) que va mucho más allá de la simple ausencia de enfermedades o dolencias en el aparato reproductor. Implica el bienestar físico, emocional, mental y social en todos los aspectos relacionados con el sistema reproductivo, sus funciones y procesos, incluyendo la capacidad de tener una vida sexual satisfactoria y segura, y la libertad para decidir tener hijos o no hacerlo. Un estudiante de educación para la salud debe definir correctamente este concepto amplio. ¿Qué abarca integralmente el concepto de salud reproductiva según la OMS?", options: ["Únicamente el uso correcto de métodos anticonceptivos modernos", "El bienestar físico, emocional, mental y social en todo lo relacionado con la reproducción y sexualidad", "Exclusivamente la prevención y tratamiento de enfermedades de transmisión sexual (ETS)", "Solo la capacidad biológica de tener hijos sin complicaciones médicas"], correct: 1 }
+];
+
+// ========== VARIABLES PARA ALMACENAR RESPUESTAS ==========
+let respuestasFisica = {};
+let respuestasQuimica = {};
+let respuestasBiologia = {};
+
+// ========== FUNCIONES PARA ABRIR EXÁMENES ==========
+function abrirExamenFisica() {
+    respuestasFisica = {};
+    const quizBody = document.getElementById('quizBodyFisica');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasFisica.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-fisica-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('fisica', ${idx}, ${optIdx})">
+                    <input type="radio" name="fisica${idx}" id="fisica${idx}_${optIdx}" value="${optIdx}">
+                    <label for="fisica${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-fisica-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalFisica').style.display = 'block';
+}
+
+function abrirExamenQuimica() {
+    respuestasQuimica = {};
+    const quizBody = document.getElementById('quizBodyQuimica');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasQuimica.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-quimica-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('quimica', ${idx}, ${optIdx})">
+                    <input type="radio" name="quimica${idx}" id="quimica${idx}_${optIdx}" value="${optIdx}">
+                    <label for="quimica${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-quimica-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalQuimica').style.display = 'block';
+}
+
+function abrirExamenBiologia() {
+    respuestasBiologia = {};
+    const quizBody = document.getElementById('quizBodyBiologia');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasBiologia.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-biologia-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('biologia', ${idx}, ${optIdx})">
+                    <input type="radio" name="biologia${idx}" id="biologia${idx}_${optIdx}" value="${optIdx}">
+                    <label for="biologia${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-biologia-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalBiologia').style.display = 'block';
+}
+
+// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS ==========
+function seleccionarRespuesta(materia, qIdx, optIdx) {
+    if (materia === 'fisica') {
+        respuestasFisica[qIdx] = optIdx;
+        const radio = document.getElementById(`fisica${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'quimica') {
+        respuestasQuimica[qIdx] = optIdx;
+        const radio = document.getElementById(`quimica${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'biologia') {
+        respuestasBiologia[qIdx] = optIdx;
+        const radio = document.getElementById(`biologia${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    }
+}
+
+// ========== FUNCIONES PARA REINICIAR EXÁMENES ==========
+function reiniciarExamen(materia) {
+    let preguntasArray, respuestasObj, prefix;
+    if (materia === 'fisica') {
+        preguntasArray = preguntasFisica;
+        respuestasObj = respuestasFisica;
+        prefix = 'fisica';
+    } else if (materia === 'quimica') {
+        preguntasArray = preguntasQuimica;
+        respuestasObj = respuestasQuimica;
+        prefix = 'quimica';
+    } else if (materia === 'biologia') {
+        preguntasArray = preguntasBiologia;
+        respuestasObj = respuestasBiologia;
+        prefix = 'biologia';
+    } else {
+        return;
+    }
+    
+    // Limpiar respuestas
+    for (let key in respuestasObj) delete respuestasObj[key];
+    
+    // Limpiar radios y feedbacks
+    for (let i = 0; i < preguntasArray.length; i++) {
+        const radios = document.querySelectorAll(`input[name="${prefix}${i}"]`);
+        radios.forEach(radio => radio.checked = false);
+        const feedback = document.getElementById(`feedback-${prefix}-${i}`);
+        if (feedback) {
+            feedback.className = 'feedback-modal';
+            feedback.innerHTML = '';
+        }
+        // Limpiar estilos de opciones
+        const optionsDivs = document.querySelectorAll(`#q-${prefix}-${i} .option-modal`);
+        optionsDivs.forEach(opt => {
+            opt.style.backgroundColor = '';
+            opt.style.border = '';
+        });
+    }
+}
+
+// ========== FUNCIÓN GENERAL PARA CALIFICAR ==========
+function calificarExamen(materia) {
+    let preguntasArray, respuestasObj, prefix, materiaNombre;
+    if (materia === 'fisica') {
+        preguntasArray = preguntasFisica;
+        respuestasObj = respuestasFisica;
+        prefix = 'fisica';
+        materiaNombre = 'Física';
+    } else if (materia === 'quimica') {
+        preguntasArray = preguntasQuimica;
+        respuestasObj = respuestasQuimica;
+        prefix = 'quimica';
+        materiaNombre = 'Química';
+    } else if (materia === 'biologia') {
+        preguntasArray = preguntasBiologia;
+        respuestasObj = respuestasBiologia;
+        prefix = 'biologia';
+        materiaNombre = 'Biología';
+    } else {
+        return;
+    }
+    
+    let correctas = 0;
+    const total = preguntasArray.length;
+    
+    for (let i = 0; i < total; i++) {
+        const respuestaUser = respuestasObj[i];
+        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasArray[i].correct);
+        if (esCorrecta) correctas++;
+        
+        const feedbackDiv = document.getElementById(`feedback-${prefix}-${i}`);
+        const letraCorrecta = String.fromCharCode(97 + preguntasArray[i].correct);
+        const textoCorrecto = preguntasArray[i].options[preguntasArray[i].correct];
+        
+        if (respuestaUser === undefined) {
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `
+                <strong>❌ No respondiste</strong><br>
+                📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
+            `;
+            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else if (esCorrecta) {
+            feedbackDiv.className = 'feedback-modal correct';
+            feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong>`;
+            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#d4edda';
+                userRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else {
+            const letraUser = String.fromCharCode(97 + respuestaUser);
+            const textoUser = preguntasArray[i].options[respuestaUser];
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `
+                <strong>❌ Incorrecto</strong><br>
+                Tu respuesta: ${letraUser}) ${textoUser}<br>
+                📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
+            `;
+            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#f8d7da';
+                userRadio.parentElement.style.border = '2px solid #dc3545';
+            }
+        }
+    }
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const resultModal = document.getElementById('resultModalGeneral');
+    const resultScore = document.getElementById('resultScoreGeneral');
+    const resultDetails = document.getElementById('resultDetailsGeneral');
+    
+    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
+    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
+    
+    let mensaje = '';
+    if (porcentaje >= 90) mensaje = `🎉 ¡Excelente! Dominas ${materiaNombre}.`;
+    else if (porcentaje >= 70) mensaje = `📘 ¡Bien en ${materiaNombre}! Sigue así.`;
+    else if (porcentaje >= 50) mensaje = `📚 Necesitas repasar ${materiaNombre}.`;
+    else mensaje = `⚠️ Estudia más ${materiaNombre}. ¡Tú puedes!`;
+    
+    resultDetails.innerHTML = mensaje;
+    
+    resultModal.style.display = 'block';
+    document.getElementById('overlayGeneral').style.display = 'block';
+}
+
+// ========== FUNCIONES PARA CERRAR MODALES ==========
+function cerrarModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function cerrarResultadoGeneral() {
+    document.getElementById('resultModalGeneral').style.display = 'none';
+    document.getElementById('overlayGeneral').style.display = 'none';
+}
+
+// ========== CONFIGURAR BOTONES DE LAS TARJETAS ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // Botón Física
+    const btnFisica = document.querySelector('.card-btn[data-materia="Física"]');
+    if (btnFisica) {
+        btnFisica.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenFisica();
+        };
+        btnFisica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Botón Química
+    const btnQuimica = document.querySelector('.card-btn[data-materia="Química"]');
+    if (btnQuimica) {
+        btnQuimica.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenQuimica();
+        };
+        btnQuimica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Botón Biología
+    const btnBiologia = document.querySelector('.card-btn[data-materia="Biología"]');
+    if (btnBiologia) {
+        btnBiologia.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenBiologia();
+        };
+        btnBiologia.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+});
+      // ========== PREGUNTAS DE HISTORIA (contexto completo estilo MCAT) ==========
+const preguntasHistoria = [
+    { text: "Un estudiante se prepara para un examen de historia y necesita definir el objeto de estudio de esta disciplina. La historia se distingue de otras ciencias sociales por su enfoque en los acontecimientos ocurridos en el tiempo, protagonizados por seres humanos y sus sociedades. ¿Cuál es el objeto de estudio de la historia?", options: ["El futuro de las civilizaciones", "Los acontecimientos pasados de la humanidad", "Las leyes que rigen la naturaleza", "Los números y las cantidades"], correct: 1 },
+    { text: "Un arqueólogo descubre restos de cerámica, herramientas de piedra y estructuras de viviendas en una excavación. Para interpretar estos hallazgos y reconstruir la vida de las sociedades del pasado, el arqueólogo se apoya en disciplinas auxiliares. Una de estas disciplinas estudia específicamente los restos materiales dejados por civilizaciones antiguas. ¿Qué ciencia auxiliar de la historia estudia los restos materiales como artefactos y edificios?", options: ["Paleografía", "Arqueología", "Numismática", "Genealogía"], correct: 1 },
+    { text: "Durante el período del Paleolítico, los grupos humanos vivían en pequeñas bandas y se dedicaban a la caza, la pesca y la recolección de frutos. Se desplazaban constantemente en busca de alimentos. Un estudiante debe identificar el estilo de vida característico de los humanos del Paleolítico. ¿Cómo se describe el estilo de vida de los grupos humanos durante el Paleolítico?", options: ["Sedentario", "Nómada", "Urbano", "Industrial"], correct: 1 },
+    { text: "La civilización egipcia se desarrolló a lo largo del río Nilo y dejó un legado monumental que aún asombra al mundo actual. Entre sus construcciones más famosas se encuentran enormes estructuras de piedra construidas como tumbas para los faraones. Un estudiante de historia antigua debe identificar estas construcciones emblemáticas de Egipto. ¿Cuál de las siguientes construcciones es característica del antiguo Egipto?", options: ["El Coliseo", "Las pirámides de Giza", "La Acrópolis de Atenas", "La Gran Muralla China"], correct: 1 },
+    { text: "En la antigua Grecia, particularmente en la ciudad-estado de Atenas, se desarrolló un sistema de gobierno en el que los ciudadanos (hombres libres nacidos en Atenas) participaban directamente en la toma de decisiones políticas mediante asambleas. Este sistema fue una innovación política importante en la historia occidental. ¿Qué forma de gobierno se originó en la antigua Atenas?", options: ["Monarquía", "Democracia directa", "Dictadura", "Oligarquía"], correct: 1 },
+    { text: "El Imperio Romano expandió su dominio por gran parte de Europa, el norte de África y el Medio Oriente. Una de sus herencias más duraderas fue el idioma latín, que con el tiempo evolucionó y dio origen a varias lenguas modernas. Un estudiante de lingüística debe identificar qué lengua moderna desciende directamente del latín. ¿Qué idioma moderno tiene su origen en el latín?", options: ["Inglés", "Español", "Alemán", "Árabe"], correct: 1 },
+    { text: "En la región de Canaán (actual Israel y Palestina), se desarrolló un pueblo que se distinguía de sus vecinos por practicar el monoteísmo, es decir, la creencia en un solo Dios. Su texto sagrado, la Torá, narra su historia desde Abraham hasta la conquista de Canaán. ¿Qué religión monoteísta surgió del pueblo hebreo?", options: ["Islam", "Budismo", "Judaísmo", "Hinduismo"], correct: 2 },
+    { text: "En el siglo XVI, un grupo de conquistadores españoles liderados por un capitán extremeño llegó a las costas del actual México y, con la alianza de diversos pueblos indígenas, logró someter al Imperio mexica (azteca). La caída de Tenochtitlan en 1521 marcó el inicio de la colonización española. ¿Quién lideró la conquista de México?", options: ["Francisco Pizarro", "Hernán Cortés", "Cristóbal Colón", "Porfirio Díaz"], correct: 1 },
+    { text: "La madrugada del 16 de septiembre de 1810, en el pueblo de Dolores (Guanajuato), un cura llamó a la rebelión contra el gobierno virreinal mediante un discurso que instaba a levantarse contra el mal gobierno y en favor de la independencia. Este evento es considerado el inicio de la Guerra de Independencia de México. ¿Quién dio el 'Grito de Dolores' que inició la lucha por la independencia?", options: ["José María Morelos", "Miguel Hidalgo", "Benito Juárez", "Agustín de Iturbide"], correct: 1 },
+    { text: "Entre 1876 y 1911, México estuvo gobernado por un militar oaxaqueño que impuso un régimen autoritario, promovió la inversión extranjera y modernizó el país, pero también reprimió a la oposición y concentró el poder. Este período se conoce como el Porfiriato. ¿Quién fue el gobernante que dominó la vida política de México durante el Porfiriato?", options: ["Lázaro Cárdenas", "Porfirio Díaz", "Álvaro Obregón", "Francisco I. Madero"], correct: 1 },
+    { text: "En 1910 estalló un movimiento armado que buscaba derrocar a Porfirio Díaz y promover reformas sociales, agrarias y políticas. Este conflicto, que duró aproximadamente una década, transformó profundamente la estructura política y social de México. ¿Cuál era el principal objetivo de la Revolución Mexicana?", options: ["Aumentar los impuestos a la clase baja", "Lograr reformas sociales y políticas", "Mantener la independencia de España", "Establecer una monarquía en México"], correct: 1 },
+    { text: "A finales del siglo XVIII, un movimiento político y social en Francia transformó radicalmente la estructura del Estado, derrocó a la monarquía absoluta y estableció principios como libertad, igualdad y fraternidad. Estas ideas influyeron en movimientos independentistas en América, incluido México. ¿Qué revolución europea inspiró los ideales de libertad e igualdad en México?", options: ["Revolución Industrial", "Revolución Francesa", "Revolución Rusa", "Revolución China"], correct: 1 },
+    { text: "En 1917, después de varios años de lucha revolucionaria, se promulgó una nueva constitución que estableció derechos laborales, educación laica y gratuita, reforma agraria y separación entre Iglesia y Estado. Esta constitución sigue vigente en México. ¿En qué año fue promulgada la Constitución Política de los Estados Unidos Mexicanos?", options: ["1810", "1857", "1917", "1921"], correct: 2 },
+    { text: "Durante el gobierno del presidente Lázaro Cárdenas (1934-1940), se tomó una decisión que afirmó la soberanía nacional sobre los recursos naturales: la expropiación de una industria estratégica controlada por empresas extranjeras. Este evento es muy recordado en la historia de México. ¿Qué industria fue nacionalizada por Lázaro Cárdenas?", options: ["Los ferrocarriles", "El petróleo", "La electricidad", "La minería"], correct: 1 },
+    { text: "Después de la Segunda Guerra Mundial, el mundo quedó dividido en dos bloques ideológicos liderados por Estados Unidos y la Unión Soviética. Estados Unidos encabezaba el bloque capitalista y democrático, mientras que la Unión Soviética lideraba el bloque comunista. ¿Qué bloque lideraba Estados Unidos durante la Guerra Fría?", options: ["Bloque comunista", "Bloque capitalista", "Bloque fascista", "Bloque socialista"], correct: 1 }
+];
+
+// ========== PREGUNTAS DE COMPUTACIÓN (contexto completo estilo MCAT) ==========
+const preguntasComputacion = [
+    { text: "Un estudiante está comprando una computadora nueva y escucha términos como 'hardware' y 'software'. El vendedor le explica que el hardware son los componentes físicos que se pueden tocar. Un estudiante debe identificar correctamente qué elementos pertenecen al hardware. ¿Cuál de las siguientes opciones describe correctamente el hardware de una computadora?", options: ["Los programas y aplicaciones instalados", "Los componentes físicos como el procesador y la memoria RAM", "El sistema operativo como Windows o Linux", "Los navegadores de internet como Chrome o Firefox"], correct: 1 },
+    { text: "Un usuario necesita escribir un ensayo para su clase. Decide utilizar un programa que le permita redactar, dar formato al texto y guardar el documento en su computadora. Un compañero le recomienda usar Microsoft Word o Google Docs. ¿Qué tipo de software son Microsoft Word y Google Docs?", options: ["Sistemas operativos", "Aplicaciones de productividad (procesadores de texto)", "Navegadores web", "Antivirus"], correct: 1 },
+    { text: "Cuando una computadora se enciende, un software especial se carga en la memoria y comienza a gestionar los recursos del hardware, permitiendo que otros programas funcionen. Este software actúa como intermediario entre el usuario y la máquina. ¿Cuál es el nombre del software que controla el hardware y permite ejecutar otros programas?", options: ["Navegador web", "Sistema operativo", "Procesador de texto", "Hoja de cálculo"], correct: 1 },
+    { text: "Un usuario ha notado que su computadora funciona más lenta de lo normal y aparecen ventanas emergentes con publicidad. Sospecha que puede tener un virus o malware. Su amigo le recomienda instalar un programa especializado para detectar y eliminar estas amenazas. ¿Qué tipo de programa se utiliza para proteger la computadora contra virus y malware?", options: ["Cortafuegos (firewall)", "Antivirus", "Navegador", "Hoja de cálculo"], correct: 1 },
+    { text: "Un estudiante debe realizar un trabajo colaborativo con sus compañeros. Todos tienen computadoras con acceso a internet. Deciden usar una herramienta en línea que les permite escribir al mismo tiempo, ver los cambios en tiempo real y guardar automáticamente el documento en la nube. ¿Para qué sirve Google Docs en este contexto?", options: ["Editar videos y audio", "Crear y editar documentos de texto de forma colaborativa", "Navegar por sitios web", "Enviar y recibir correos electrónicos"], correct: 1 },
+    { text: "Un estudiante está investigando sobre la Revolución Mexicana en internet. Escribe en el buscador 'Revolución Mexicana' y obtiene muchos resultados sobre el movimiento armado. Sin embargo, también aparecen páginas que mencionan 'revolución' en otros contextos. Para obtener solo páginas que contengan la frase exacta, debe usar un operador de búsqueda. ¿Qué operador de búsqueda debe usar para encontrar una frase exacta?", options: ["Revolución -Mexicana", "\"Revolución Mexicana\" (con comillas)", "Revolución OR Mexicana", "Revolución AND Mexicana"], correct: 1 },
+    { text: "Un estudiante encuentra una página web que parece útil para su investigación, pero no sabe si la información es confiable. El sitio web termina en '.edu' y pertenece a una universidad reconocida. El autor del artículo es un profesor con publicaciones en el tema. ¿Qué característica indica que una página web es confiable para fines académicos?", options: ["Que tenga muchos anuncios publicitarios", "Que sea un dominio .edu o .org de una institución reconocida", "Que tenga muchos colores y gráficos animados", "Que incluya muchas imágenes sin texto"], correct: 1 },
+    { text: "Un usuario crea una cuenta en un sitio web y debe elegir una contraseña. El sistema le indica que la contraseña debe ser segura para evitar que otros la adivinen o la descifren fácilmente. Un experto en seguridad recomienda evitar fechas de nacimiento o palabras comunes. ¿Qué característica debe tener una contraseña segura?", options: ["Ser corta y fácil de recordar", "Usar solo números, como la fecha de nacimiento", "Ser larga e incluir letras, números y símbolos", "Usar la palabra 'contraseña' o '123456'"], correct: 2 },
+    { text: "Un estudiante copia un párrafo completo de un sitio web y lo pega en su tarea sin mencionar la fuente. El profesor detecta que el texto no fue escrito por el estudiante y le explica que esto es una falta ética grave en el ámbito académico. ¿Cómo se denomina la acción de copiar el trabajo de otro y presentarlo como propio?", options: ["Parafrasear", "Citar correctamente", "Plagio", "Resumir"], correct: 2 },
+    { text: "Un usuario recibe un correo electrónico que parece ser de su banco. El mensaje le solicita que haga clic en un enlace y proporcione su número de cuenta y contraseña para 'verificar su identidad'. El usuario sospecha que puede ser un intento de robo de información. ¿Cómo se denomina esta técnica de ciberdelincuencia en la que se suplanta la identidad de una entidad confiable para robar datos?", options: ["Hackeo", "Phishing", "Spam", "Malware"], correct: 1 },
+    { text: "Un técnico en sistemas recomienda a una empresa que realice copias periódicas de toda su información en discos duros externos o en la nube. De esta manera, si ocurre un fallo en el sistema o un ataque de ransomware, la empresa puede recuperar sus datos sin pérdidas importantes. ¿Qué es una copia de seguridad?", options: ["Un programa antivirus", "Un respaldo de la información almacenada", "Un tipo de sistema operativo", "Un navegador de internet"], correct: 1 },
+    { text: "Un usuario recibe un mensaje por correo electrónico de un remitente desconocido que dice: 'Has ganado un premio. Haz clic aquí para reclamarlo'. El enlace parece sospechoso y la oferta parece demasiado buena para ser verdad. Un experto en seguridad recomienda no hacer clic en estos enlaces. ¿Qué debe hacer un usuario ante un enlace de una fuente desconocida?", options: ["Abrirlo inmediatamente", "Reenviarlo a todos sus contactos", "No abrirlo y reportarlo como sospechoso", "Guardarlo en favoritos"], correct: 2 },
+    { text: "Un usuario configura su red wifi en casa. Para evitar que vecinos o personas externas se conecten sin permiso y accedan a sus dispositivos, debe establecer una medida de seguridad en el router. Los expertos recomiendan algo que impida el acceso no autorizado. ¿Qué medida protege una red wifi contra conexiones no autorizadas?", options: ["Usar el nombre de red (SSID) público", "No usar ninguna contraseña", "Establecer una contraseña fuerte y cifrado WPA2 o WPA3", "Compartir la contraseña con todas las visitas"], correct: 2 },
+    { text: "Un estudiante necesita organizar una tabla con las calificaciones de sus compañeros, calcular promedios y crear una gráfica con los resultados. El profesor sugiere usar una herramienta de software diseñada específicamente para manejar datos numéricos, realizar cálculos y generar gráficos. ¿Qué tipo de software es más adecuado para hacer cálculos y tablas?", options: ["Procesador de texto", "Hoja de cálculo (como Excel o Google Sheets)", "Navegador web", "Reproductor de video"], correct: 1 },
+    { text: "Un empleado de una empresa comparte en sus redes sociales una lista de clientes con sus direcciones y números telefónicos sin autorización de la empresa. El gerente le informa que esta acción viola la privacidad de los clientes y puede tener consecuencias legales. ¿Cómo se considera compartir información confidencial sin permiso?", options: ["Un acto legal y permitido", "Una práctica ética y recomendable", "Una violación de la privacidad", "Una medida de seguridad informática"], correct: 2 }
+];
+
+// ========== VARIABLES PARA ALMACENAR RESPUESTAS ==========
+let respuestasHistoria = {};
+let respuestasComputacion = {};
+
+// ========== FUNCIONES PARA ABRIR EXÁMENES ==========
+function abrirExamenHistoria() {
+    respuestasHistoria = {};
+    const quizBody = document.getElementById('quizBodyHistoria');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasHistoria.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-historia-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('historia', ${idx}, ${optIdx})">
+                    <input type="radio" name="historia${idx}" id="historia${idx}_${optIdx}" value="${optIdx}">
+                    <label for="historia${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-historia-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalHistoria').style.display = 'block';
+}
+
+function abrirExamenComputacion() {
+    respuestasComputacion = {};
+    const quizBody = document.getElementById('quizBodyComputacion');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasComputacion.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-computacion-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('computacion', ${idx}, ${optIdx})">
+                    <input type="radio" name="computacion${idx}" id="computacion${idx}_${optIdx}" value="${optIdx}">
+                    <label for="computacion${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-computacion-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalComputacion').style.display = 'block';
+}
+
+// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS ==========
+function seleccionarRespuesta(materia, qIdx, optIdx) {
+    if (materia === 'historia') {
+        respuestasHistoria[qIdx] = optIdx;
+        const radio = document.getElementById(`historia${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'computacion') {
+        respuestasComputacion[qIdx] = optIdx;
+        const radio = document.getElementById(`computacion${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    }
+}
+
+// ========== FUNCIONES PARA REINICIAR EXÁMENES ==========
+function reiniciarExamen(materia) {
+    let preguntasArray, respuestasObj, prefix;
+    if (materia === 'historia') {
+        preguntasArray = preguntasHistoria;
+        respuestasObj = respuestasHistoria;
+        prefix = 'historia';
+    } else if (materia === 'computacion') {
+        preguntasArray = preguntasComputacion;
+        respuestasObj = respuestasComputacion;
+        prefix = 'computacion';
+    } else {
+        return;
+    }
+    
+    for (let key in respuestasObj) delete respuestasObj[key];
+    
+    for (let i = 0; i < preguntasArray.length; i++) {
+        const radios = document.querySelectorAll(`input[name="${prefix}${i}"]`);
+        radios.forEach(radio => radio.checked = false);
+        const feedback = document.getElementById(`feedback-${prefix}-${i}`);
+        if (feedback) {
+            feedback.className = 'feedback-modal';
+            feedback.innerHTML = '';
+        }
+        const optionsDivs = document.querySelectorAll(`#q-${prefix}-${i} .option-modal`);
+        optionsDivs.forEach(opt => {
+            opt.style.backgroundColor = '';
+            opt.style.border = '';
+        });
+    }
+}
+
+// ========== FUNCIÓN GENERAL PARA CALIFICAR ==========
+function calificarExamen(materia) {
+    let preguntasArray, respuestasObj, prefix, materiaNombre;
+    if (materia === 'historia') {
+        preguntasArray = preguntasHistoria;
+        respuestasObj = respuestasHistoria;
+        prefix = 'historia';
+        materiaNombre = 'Historia';
+    } else if (materia === 'computacion') {
+        preguntasArray = preguntasComputacion;
+        respuestasObj = respuestasComputacion;
+        prefix = 'computacion';
+        materiaNombre = 'Computación';
+    } else {
+        return;
+    }
+    
+    let correctas = 0;
+    const total = preguntasArray.length;
+    
+    for (let i = 0; i < total; i++) {
+        const respuestaUser = respuestasObj[i];
+        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasArray[i].correct);
+        if (esCorrecta) correctas++;
+        
+        const feedbackDiv = document.getElementById(`feedback-${prefix}-${i}`);
+        const letraCorrecta = String.fromCharCode(97 + preguntasArray[i].correct);
+        const textoCorrecto = preguntasArray[i].options[preguntasArray[i].correct];
+        
+        if (respuestaUser === undefined) {
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `<strong>❌ No respondiste</strong><br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
+            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else if (esCorrecta) {
+            feedbackDiv.className = 'feedback-modal correct';
+            feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong>`;
+            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#d4edda';
+                userRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else {
+            const letraUser = String.fromCharCode(97 + respuestaUser);
+            const textoUser = preguntasArray[i].options[respuestaUser];
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `<strong>❌ Incorrecto</strong><br>Tu respuesta: ${letraUser}) ${textoUser}<br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
+            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#f8d7da';
+                userRadio.parentElement.style.border = '2px solid #dc3545';
+            }
+        }
+    }
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const resultModal = document.getElementById('resultModalGeneral');
+    const resultScore = document.getElementById('resultScoreGeneral');
+    const resultDetails = document.getElementById('resultDetailsGeneral');
+    
+    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
+    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
+    
+    let mensaje = '';
+    if (porcentaje >= 90) mensaje = `🎉 ¡Excelente! Dominas ${materiaNombre}.`;
+    else if (porcentaje >= 70) mensaje = `📘 ¡Bien en ${materiaNombre}! Sigue así.`;
+    else if (porcentaje >= 50) mensaje = `📚 Necesitas repasar ${materiaNombre}.`;
+    else mensaje = `⚠️ Estudia más ${materiaNombre}. ¡Tú puedes!`;
+    
+    resultDetails.innerHTML = mensaje;
+    resultModal.style.display = 'block';
+    document.getElementById('overlayGeneral').style.display = 'block';
+}
+
+// ========== FUNCIONES PARA CERRAR MODALES ==========
+function cerrarModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function cerrarResultadoGeneral() {
+    document.getElementById('resultModalGeneral').style.display = 'none';
+    document.getElementById('overlayGeneral').style.display = 'none';
+}
+
+// ========== CONFIGURAR BOTONES DE LAS TARJETAS ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // Botón Historia
+    const btnHistoria = document.querySelector('.card-btn[data-materia="Historia"]');
+    if (btnHistoria) {
+        btnHistoria.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenHistoria();
+        };
+        btnHistoria.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Botón Computación
+    const btnComputacion = document.querySelector('.card-btn[data-materia="Computación"]');
+    if (btnComputacion) {
+        btnComputacion.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenComputacion();
+        };
+        btnComputacion.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+});
+      // ========== PREGUNTAS DE INGLÉS (contexto completo estilo MCAT) ==========
+const preguntasIngles = [
+    { text: "Un estudiante de inglés está aprendiendo a presentarse en el idioma. Quiere decir 'Yo soy estudiante' en una conversación. Debe recordar la forma correcta del verbo 'to be' para la primera persona del singular en presente simple. ¿Cuál es la forma correcta de decir 'Yo soy estudiante' en inglés?", options: ["I am student", "I is student", "I are student", "I be student"], correct: 0 },
+    { text: "Un alumno está estudiando los verbos irregulares en inglés. Encuentra el verbo 'go' (ir) y necesita saber cuál es su forma en pasado simple para poder narrar acciones que ocurrieron ayer. El verbo 'go' no sigue la regla de agregar '-ed'. ¿Cuál es la forma en pasado simple del verbo 'go'?", options: ["Goed", "Went", "Gone", "Going"], correct: 1 },
+    { text: "Un estudiante está escribiendo un cuento en inglés y necesita usar el plural de la palabra 'child' (niño). Sabe que no todos los sustantivos forman el plural agregando '-s' o '-es'. Debe recordar cuál es la forma plural irregular correcta de 'child'. ¿Cuál es el plural correcto de 'child'?", options: ["Childs", "Children", "Childes", "Childrens"], correct: 1 },
+    { text: "Un estudiante está leyendo una oración en inglés: 'She was eating breakfast when the phone rang'. El profesor le pregunta en qué tiempo verbal está escrita esta oración. La estructura incluye el verbo 'to be' en pasado ('was') más un verbo con terminación '-ing' ('eating'). ¿Qué tiempo verbal se utiliza en esta oración?", options: ["Presente simple", "Pasado simple", "Pasado continuo", "Futuro simple"], correct: 2 },
+    { text: "Un viajero está en un mercado en Estados Unidos y quiere decirle al vendedor 'Me gustan las manzanas'. Debe recordar la estructura correcta del verbo 'like' en inglés para expresar gustos en presente. ¿Cuál es la forma correcta de decir 'Me gustan las manzanas' en inglés?", options: ["I like apples", "I likes apples", "I liking apples", "I am like apples"], correct: 0 },
+    { text: "Un estudiante está repasando los verbos irregulares y se encuentra con el verbo 'sing' (cantar). Necesita usar el participio pasado para formar el presente perfecto ('I have sung'). Debe recordar cuál es la forma del participio pasado de 'sing'. ¿Cuál es el participio pasado del verbo 'sing'?", options: ["Sang", "Sung", "Singed", "Singing"], correct: 1 },
+    { text: "En una clase de inglés, la maestra pide a los alumnos que encuentren el antónimo (opuesto) de la palabra 'happy' (feliz). Los alumnos deben recordar qué palabra expresa el estado emocional contrario a la felicidad. ¿Qué palabra es el opuesto (antónimo) de 'happy'?", options: ["Sad", "Joyful", "Glad", "Excited"], correct: 0 },
+    { text: "Un estudiante quiere expresar una acción que ocurrirá en el futuro, específicamente el próximo fin de semana. Debe elegir la estructura gramatical correcta para formar el futuro simple en inglés. ¿Cuál de las siguientes oraciones expresa una acción en futuro simple?", options: ["I go to school", "I went to school", "I will go to school", "I am going to school now"], correct: 2 },
+    { text: "Un alumno debe completar la siguiente oración con la forma correcta del verbo 'do' en pasado simple: 'She ___ her homework yesterday.' (Ella hizo su tarea ayer). El verbo 'do' es irregular en pasado. ¿Qué palabra completa correctamente la oración?", options: ["do", "does", "did", "done"], correct: 2 },
+    { text: "Un turista llega a un hotel en Londres a las 9:00 de la mañana y quiere saludar al recepcionista de manera apropiada según la hora del día. Debe recordar el saludo matutino estándar en inglés. ¿Cómo se saluda apropiadamente por la mañana en inglés?", options: ["Good night", "Good morning", "Good evening", "Good bye"], correct: 1 },
+    { text: "Un estudiante de inglés está en su primera clase y quiere preguntarle a su compañero cómo se siente o cómo está en ese momento. Debe usar una expresión común en inglés para preguntar por el estado de ánimo o la salud. ¿Cómo se pregunta '¿Cómo estás?' en inglés?", options: ["How old are you?", "How are you?", "What is your name?", "Where are you from?"], correct: 1 },
+    { text: "Un estudiante está leyendo un texto en inglés y encuentra una palabra que no conoce. Su profesor le recomienda usar una herramienta para buscar el significado de palabras desconocidas. ¿Qué debe hacer un estudiante cuando encuentra una palabra desconocida en un texto en inglés?", options: ["Ignorarla y continuar leyendo", "Usar un diccionario para buscar su significado", "Saltarse todo el párrafo", "Reescribir el texto sin esa palabra"], correct: 1 },
+    { text: "Un estudiante está aprendiendo la regla de los verbos regulares en pasado simple. Sabe que para la mayoría de los verbos se agrega '-ed'. El verbo 'play' (jugar) es regular. ¿Cuál es la forma en pasado simple del verbo 'play'?", options: ["Played", "Plaied", "Play", "Playing"], correct: 0 },
+    { text: "Un estudiante quiere decir en inglés 'El libro de María' (el libro que pertenece a María). Debe usar correctamente el apóstrofo para indicar posesión. ¿Cuál es la forma correcta de decir 'El libro de María'?", options: ["Maria book", "Book of Maria", "Maria's book", "Maria book's"], correct: 2 },
+    { text: "Un turista mexicano está en Nueva York y un desconocido le sostiene la puerta. El turista quiere expresar cortesía y agradecimiento. Debe recordar la expresión en inglés que se usa para dar las gracias. ¿Qué significa la expresión 'Thank you' en inglés?", options: ["Por favor", "Gracias", "De nada", "Hola"], correct: 1 }
+];
+
+// ========== PREGUNTAS DE ÉTICA DIGITAL (contexto completo estilo MCAT) ==========
+const preguntasEtica = [
+    { text: "Un estudiante está investigando para su tarea escolar y encuentra un artículo perfecto en internet. Decide copiar tres párrafos completos y pegarlos en su trabajo sin mencionar de dónde los obtuvo. El profesor detecta que el texto no fue escrito por el estudiante. ¿Cómo se denomina esta acción en el ámbito académico y legal?", options: ["Parafraseo", "Cita textual", "Plagio", "Resumen"], correct: 2 },
+    { text: "Una empresa recopila datos personales de sus clientes, como direcciones, números de teléfono y correos electrónicos. Un empleado decide compartir esta información con un amigo que trabaja en otra empresa, sin el consentimiento de los clientes. ¿Qué principio ético está violando este empleado?", options: ["El derecho a la libertad de expresión", "El derecho a la privacidad y confidencialidad de los datos", "El derecho al trabajo", "El derecho a la educación"], correct: 1 },
+    { text: "Un usuario de redes sociales publica un comentario ofensivo y falso sobre un compañero de escuela. El comentario se vuelve viral y causa daño a la reputación del compañero. ¿Qué tipo de comportamiento digital inapropiado está ejerciendo este usuario?", options: ["Ciberacoso (ciberbullying)", "Phishing", "Spam", "Hackeo"], correct: 0 },
+    { text: "Un estudiante descarga música y películas de internet sin pagar por ellas, utilizando sitios no autorizados. Sabe que los artistas y creadores dependen de las ventas para vivir, pero justifica su acción diciendo que 'todo el mundo lo hace'. ¿Qué concepto ético relacionado con la propiedad intelectual está ignorando?", options: ["Derecho a la privacidad", "Derechos de autor", "Libertad de expresión", "Acceso universal a la cultura"], correct: 1 },
+    { text: "Un adolescente recibe un mensaje de texto de un número desconocido que dice: 'Ganaste un premio de $10,000. Haz clic en este enlace para reclamarlo'. El enlace parece legítimo, pero el adolescente sospecha que puede ser una estafa. ¿Qué técnica de ciberdelincuencia intenta engañar a las personas haciéndose pasar por una entidad confiable para robar información personal?", options: ["Hackeo", "Phishing", "Malware", "Spam"], correct: 1 },
+    { text: "Un estudiante publica en sus redes sociales una foto de su credencial escolar, donde se ven claramente su nombre completo, número de estudiante y código de barras. Un amigo le advierte que esto es peligroso. ¿Qué riesgo corre el estudiante al compartir información personal identificable en internet?", options: ["Que alguien le dé 'me gusta' a su foto", "Que suplanten su identidad o accedan a sus cuentas", "Que mejoren su reputación en línea", "Que reciba más seguidores"], correct: 1 },
+    { text: "Una empresa instala software de monitoreo en las computadoras de sus empleados para registrar cada sitio web que visitan y cada correo que envían. Los empleados no fueron informados de esta práctica. ¿Qué problema ético plantea esta situación?", options: ["Protección de la propiedad de la empresa", "Invasión de la privacidad de los empleados", "Mejora de la productividad laboral", "Cumplimiento de la ley"], correct: 1 },
+    { text: "Un estudiante utiliza una contraseña muy simple en todas sus cuentas: su fecha de nacimiento. Un compañero adivina la contraseña fácilmente y accede a su correo electrónico. ¿Cuál de las siguientes prácticas de seguridad informática debería haber seguido el estudiante?", options: ["Usar la misma contraseña para todo", "Anotar la contraseña en un papel", "Crear una contraseña larga con letras, números y símbolos", "Compartir su contraseña con amigos de confianza"], correct: 2 },
+    { text: "Un profesor asigna un trabajo en equipo y los estudiantes deciden usar una inteligencia artificial (como ChatGPT) para generar todo el contenido. Luego lo entregan como si fuera de su autoría, sin mencionar el uso de la IA. ¿Esta acción se considera éticamente aceptable en el ámbito académico?", options: ["Sí, porque la IA es una herramienta como cualquier otra", "Sí, porque el profesor no prohibió explícitamente su uso", "No, porque constituye una forma de deshonestidad académica al no dar crédito", "No, porque usar IA es ilegal en todos los contextos"], correct: 2 },
+    { text: "Un usuario recibe un correo electrónico que parece ser de su banco, solicitándole que actualice sus datos haciendo clic en un enlace. El usuario nota que la dirección del remitente tiene un error ortográfico y que el enlace no lleva al sitio oficial del banco. ¿Qué debe hacer el usuario en esta situación?", options: ["Hacer clic en el enlace para actualizar sus datos", "Reenviar el correo a todos sus contactos", "No hacer clic, reportar como sospechoso y contactar al banco directamente", "Ignorar el correo y borrarlo sin más acción"], correct: 2 },
+    { text: "Un estudiante descarga un programa 'gratuito' de internet. Después de instalarlo, su computadora comienza a mostrar ventanas emergentes y funciona más lenta. Un experto le dice que probablemente instaló un programa malicioso. ¿Cómo se denomina este tipo de software dañino?", options: ["Antivirus", "Firewall", "Malware", "Navegador"], correct: 2 },
+    { text: "Una persona quiere compartir un artículo interesante que encontró en internet. En lugar de copiar y pegar el texto completo, escribe un resumen con sus propias palabras y añade un enlace al artículo original. ¿Esta práctica es éticamente correcta?", options: ["No, porque sigue usando información de otro autor", "Sí, porque está parafraseando y dando crédito a la fuente original", "No, porque debería pedir permiso al autor", "Sí, porque todo en internet es de dominio público"], correct: 1 },
+    { text: "Una escuela decide instalar filtros de contenido en sus computadoras para bloquear sitios web inapropiados durante el horario escolar. Los estudiantes se quejan de que esto limita su libertad. ¿Cómo se justifica éticamente esta decisión de la escuela?", options: ["No se justifica, es una violación a la libertad", "La escuela tiene la responsabilidad de proteger a los menores de contenido dañino", "La escuela quiere ahorrar ancho de banda", "Los filtros son obligatorios por ley internacional"], correct: 1 },
+    { text: "Un adolescente publica en TikTok un video bailando con la canción completa de un artista famoso. El video se vuelve viral y el adolescente gana dinero por las visitas. ¿Qué aspecto de la propiedad intelectual podría estar violando?", options: ["Ninguno, porque bailar no es ilegal", "El derecho del artista a controlar el uso comercial de su música", "El derecho a la privacidad del adolescente", "Las normas de etiqueta en redes sociales"], correct: 1 },
+    { text: "Una persona nota que alguien está usando sus fotos de perfil para crear cuentas falsas en redes sociales. La persona quiere saber qué derecho fundamental está siendo violado. ¿Cuál de los siguientes derechos se relaciona con el control de la propia imagen e información personal?", options: ["Derecho al olvido digital", "Derecho a la desconexión digital", "Derecho a la identidad digital y protección de datos", "Derecho al acceso a internet"], correct: 2 }
+];
+
+// ========== PREGUNTAS DE SALUD Y SEXUALIDAD (contexto completo estilo MCAT) ==========
+const preguntasSalud = [
+    { text: "Un estudiante de biología está aprendiendo sobre la salud sexual. Según la Organización Mundial de la Salud (OMS), este concepto va más allá de la ausencia de enfermedades. Incluye el bienestar físico, emocional, mental y social en todo lo relacionado con la sexualidad. ¿Qué abarca el concepto de salud sexual?", options: ["Solo el uso de métodos anticonceptivos", "El bienestar físico, emocional, mental y social relacionado con la sexualidad", "Exclusivamente la prevención de enfermedades de transmisión sexual", "Solo la capacidad de tener hijos sin complicaciones"], correct: 1 },
+    { text: "Dos adolescentes están conversando sobre los métodos anticonceptivos. Uno de ellos menciona que algunos métodos también protegen contra las infecciones de transmisión sexual (ITS), mientras que otros solo previenen el embarazo. ¿Cuál de los siguientes métodos anticonceptivos es el único que también protege eficazmente contra la mayoría de las ITS?", options: ["La píldora anticonceptiva", "El dispositivo intrauterino (DIU)", "El preservativo (condón)", "El implante subdérmico"], correct: 2 },
+    { text: "Una adolescente ha tenido relaciones sexuales sin protección y está preocupada por un posible embarazo no deseado. Recuerda que existe un método de emergencia que puede usarse dentro de los primeros 5 días después de la relación sexual. ¿Cómo se llama este método anticonceptivo de emergencia?", options: ["Anticoncepción hormonal diaria", "Anticoncepción de emergencia o 'pastilla del día después'", "Aborto inducido", "Esterilización"], correct: 1 },
+    { text: "Un joven acude a una clínica de salud porque presenta secreción uretral y dolor al orinar. El médico le explica que estos síntomas pueden indicar una infección de transmisión sexual (ITS) y que es importante diagnosticarla y tratarla a tiempo. ¿Cuál de las siguientes es una infección de transmisión sexual bacteriana que puede curarse con antibióticos?", options: ["VIH/SIDA", "Herpes genital", "Sífilis", "Virus del papiloma humano (VPH)"], correct: 2 },
+    { text: "Una pareja ha estado intentando tener un bebé durante más de un año sin éxito. Deciden consultar a un especialista, quien les explica que pueden existir múltiples causas para esta dificultad. El especialista les habla sobre el concepto de 'salud reproductiva'. ¿Qué aspecto NO está incluido dentro de la salud reproductiva?", options: ["La planificación familiar", "La atención prenatal y parto seguro", "La prevención y tratamiento de la infertilidad", "El rendimiento deportivo"], correct: 3 },
+    { text: "Un estudiante está investigando sobre el desarrollo humano. Lee que la pubertad es el período en el que ocurren cambios físicos y hormonales que preparan al cuerpo para la reproducción. ¿Cuál de las siguientes hormonas es la principal responsable de los cambios en la pubertad femenina?", options: ["Testosterona", "Estrógeno", "Adrenalina", "Insulina"], correct: 1 },
+    { text: "Una mujer acude a su revisión ginecológica anual. Su médico le recomienda realizarse una prueba que detecta la presencia del Virus del Papiloma Humano (VPH) y de células anormales en el cuello uterino, lo que permite prevenir el cáncer cervicouterino. ¿Cómo se llama esta prueba de detección?", options: ["Mamografía", "Ultrasonido pélvico", "Papanicolaou (PAP)", "Biopsia endometrial"], correct: 2 },
+    { text: "Dos amigos están discutiendo sobre la reproducción humana. Uno de ellos dice que la reproducción sexual implica la fusión de dos células especializadas. El otro no está seguro. ¿Cómo se llaman las células sexuales masculinas y femeninas en los seres humanos?", options: ["Neuronas y glóbulos rojos", "Espermatozoides y óvulos", "Leucocitos y plaquetas", "Células madre y hepatocitos"], correct: 1 },
+    { text: "Una adolescente le pregunta a su madre sobre la menstruación. Su madre le explica que es un proceso natural del ciclo reproductivo femenino. ¿Qué ocurre durante la menstruación?", options: ["La liberación de un óvulo desde el ovario", "La fecundación del óvulo por un espermatozoide", "El desprendimiento del endometrio (revestimiento interno del útero)", "La implantación del embrión en el útero"], correct: 2 },
+    { text: "Un joven acude a una charla sobre prevención de ITS. El ponente explica que algunas infecciones son causadas por virus y, aunque se pueden controlar los síntomas, no tienen cura. Otras, en cambio, son causadas por bacterias y pueden curarse con antibióticos. ¿Cuál de las siguientes ITS es causada por un virus y actualmente no tiene cura?", options: ["Clamidia", "Gonorrea", "VIH/SIDA", "Sífilis"], correct: 2 },
+    { text: "Una pareja casada decide espaciar sus embarazos por razones de salud y económicas. Acuden a un centro de salud donde les ofrecen diferentes opciones para planificar su familia de manera voluntaria e informada. ¿Cómo se llama el conjunto de métodos y servicios que permiten a las personas decidir el número y espaciamiento de sus hijos?", options: ["Anticoncepción de emergencia", "Planificación familiar", "Esterilización forzada", "Aborto inducido"], correct: 1 },
+    { text: "Un adolescente asiste a una plática sobre consentimiento en las relaciones sexuales. El ponente explica que el consentimiento debe ser libre, informado, entusiasta y puede retirarse en cualquier momento. ¿Cuál de las siguientes situaciones NO constituye un consentimiento válido?", options: ["Una persona dice 'sí' después de pensar en la decisión", "Una persona está bajo los efectos del alcohol o drogas", "Una persona dice 'sí' pero luego cambia de opinión", "Una persona dice 'sí' de manera voluntaria sin presión"], correct: 1 },
+    { text: "Una mujer embarazada acude a todas sus citas de control prenatal. El médico le explica que ciertos nutrientes son especialmente importantes durante el embarazo para prevenir malformaciones en el bebé. ¿Qué vitamina es fundamental durante el primer trimestre del embarazo para prevenir defectos del tubo neural?", options: ["Vitamina C", "Vitamina D", "Ácido fólico (Vitamina B9)", "Vitamina B12"], correct: 2 },
+    { text: "Un estudiante está aprendiendo sobre el ciclo menstrual. Sabe que dura aproximadamente 28 días y que hay un momento en el que la mujer es más fértil. ¿Cómo se llama el día en que el ovario libera un óvulo?", options: ["Menstruación", "Fase lútea", "Ovulación", "Fase folicular"], correct: 2 },
+    { text: "Una pareja heterosexual quiere evitar un embarazo. La mujer decide usar un método anticonceptivo hormonal que se coloca en el brazo y dura 3 años. ¿Cómo se llama este método?", options: ["Parche anticonceptivo", "Implante subdérmico", "Anillo vaginal", "Inyección mensual"], correct: 1 }
+];
+
+// ========== VARIABLES PARA ALMACENAR RESPUESTAS ==========
+let respuestasingles = {};
+let respuestasEtica = {};
+let respuestasSalud = {};
+
+// ========== FUNCIONES PARA ABRIR EXÁMENES ==========
+function abrirExamenIngles() {
+    respuestasingles = {};
+    const quizBody = document.getElementById('quizBodyIngles');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasIngles.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-ingles-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('ingles', ${idx}, ${optIdx})">
+                    <input type="radio" name="ingles${idx}" id="ingles${idx}_${optIdx}" value="${optIdx}">
+                    <label for="ingles${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-ingles-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalIngles').style.display = 'block';
+}
+
+function abrirExamenEtica() {
+    respuestasEtica = {};
+    const quizBody = document.getElementById('quizBodyEtica');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasEtica.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-etica-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('etica', ${idx}, ${optIdx})">
+                    <input type="radio" name="etica${idx}" id="etica${idx}_${optIdx}" value="${optIdx}">
+                    <label for="etica${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-etica-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalEtica').style.display = 'block';
+}
+
+function abrirExamenSalud() {
+    respuestasSalud = {};
+    const quizBody = document.getElementById('quizBodySalud');
+    if (!quizBody) return;
+    quizBody.innerHTML = '';
+    
+    preguntasSalud.forEach((q, idx) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-modal';
+        questionDiv.id = `q-salud-${idx}`;
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(97 + optIdx);
+            optionsHtml += `
+                <div class="option-modal" onclick="seleccionarRespuesta('salud', ${idx}, ${optIdx})">
+                    <input type="radio" name="salud${idx}" id="salud${idx}_${optIdx}" value="${optIdx}">
+                    <label for="salud${idx}_${optIdx}"><strong>${letter})</strong> ${opt}</label>
+                </div>
+            `;
+        });
+        
+        questionDiv.innerHTML = `
+            <div class="question-text-modal">${idx + 1}. ${q.text}</div>
+            <div class="options-modal">${optionsHtml}</div>
+            <div class="feedback-modal" id="feedback-salud-${idx}"></div>
+        `;
+        quizBody.appendChild(questionDiv);
+    });
+    
+    document.getElementById('quizModalSalud').style.display = 'block';
+}
+
+// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS (ampliar la existente) ==========
+// Nota: Esta función ya existe en tu código. Solo agrega estos casos dentro de la función que ya tienes.
+// Si prefieres reemplazar la función completa, usa esta versión:
+
+function seleccionarRespuesta(materia, qIdx, optIdx) {
+    if (materia === 'historia') {
+        respuestasHistoria[qIdx] = optIdx;
+        const radio = document.getElementById(`historia${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'computacion') {
+        respuestasComputacion[qIdx] = optIdx;
+        const radio = document.getElementById(`computacion${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'ingles') {
+        respuestasingles[qIdx] = optIdx;
+        const radio = document.getElementById(`ingles${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'etica') {
+        respuestasEtica[qIdx] = optIdx;
+        const radio = document.getElementById(`etica${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'salud') {
+        respuestasSalud[qIdx] = optIdx;
+        const radio = document.getElementById(`salud${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    }
+}
+
+// ========== FUNCIONES PARA REINICIAR EXÁMENES (ampliar la existente) ==========
+function reiniciarExamen(materia) {
+    let preguntasArray, respuestasObj, prefix;
+    if (materia === 'historia') {
+        preguntasArray = preguntasHistoria;
+        respuestasObj = respuestasHistoria;
+        prefix = 'historia';
+    } else if (materia === 'computacion') {
+        preguntasArray = preguntasComputacion;
+        respuestasObj = respuestasComputacion;
+        prefix = 'computacion';
+    } else if (materia === 'ingles') {
+        preguntasArray = preguntasIngles;
+        respuestasObj = respuestasingles;
+        prefix = 'ingles';
+    } else if (materia === 'etica') {
+        preguntasArray = preguntasEtica;
+        respuestasObj = respuestasEtica;
+        prefix = 'etica';
+    } else if (materia === 'salud') {
+        preguntasArray = preguntasSalud;
+        respuestasObj = respuestasSalud;
+        prefix = 'salud';
+    } else {
+        return;
+    }
+    
+    for (let key in respuestasObj) delete respuestasObj[key];
+    
+    for (let i = 0; i < preguntasArray.length; i++) {
+        const radios = document.querySelectorAll(`input[name="${prefix}${i}"]`);
+        radios.forEach(radio => radio.checked = false);
+        const feedback = document.getElementById(`feedback-${prefix}-${i}`);
+        if (feedback) {
+            feedback.className = 'feedback-modal';
+            feedback.innerHTML = '';
+        }
+        const optionsDivs = document.querySelectorAll(`#q-${prefix}-${i} .option-modal`);
+        optionsDivs.forEach(opt => {
+            opt.style.backgroundColor = '';
+            opt.style.border = '';
+        });
+    }
+}
+
+// ========== FUNCIÓN GENERAL PARA CALIFICAR (ampliar la existente) ==========
+function calificarExamen(materia) {
+    let preguntasArray, respuestasObj, prefix, materiaNombre;
+    if (materia === 'historia') {
+        preguntasArray = preguntasHistoria;
+        respuestasObj = respuestasHistoria;
+        prefix = 'historia';
+        materiaNombre = 'Historia';
+    } else if (materia === 'computacion') {
+        preguntasArray = preguntasComputacion;
+        respuestasObj = respuestasComputacion;
+        prefix = 'computacion';
+        materiaNombre = 'Computación';
+    } else if (materia === 'ingles') {
+        preguntasArray = preguntasIngles;
+        respuestasObj = respuestasingles;
+        prefix = 'ingles';
+        materiaNombre = 'Inglés';
+    } else if (materia === 'etica') {
+        preguntasArray = preguntasEtica;
+        respuestasObj = respuestasEtica;
+        prefix = 'etica';
+        materiaNombre = 'Ética Digital';
+    } else if (materia === 'salud') {
+        preguntasArray = preguntasSalud;
+        respuestasObj = respuestasSalud;
+        prefix = 'salud';
+        materiaNombre = 'Salud y Sexualidad';
+    } else {
+        return;
+    }
+    
+    let correctas = 0;
+    const total = preguntasArray.length;
+    
+    for (let i = 0; i < total; i++) {
+        const respuestaUser = respuestasObj[i];
+        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasArray[i].correct);
+        if (esCorrecta) correctas++;
+        
+        const feedbackDiv = document.getElementById(`feedback-${prefix}-${i}`);
+        const letraCorrecta = String.fromCharCode(97 + preguntasArray[i].correct);
+        const textoCorrecto = preguntasArray[i].options[preguntasArray[i].correct];
+        
+        if (respuestaUser === undefined) {
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `<strong>❌ No respondiste</strong><br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
+            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else if (esCorrecta) {
+            feedbackDiv.className = 'feedback-modal correct';
+            feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong>`;
+            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#d4edda';
+                userRadio.parentElement.style.border = '2px solid #28a745';
+            }
+        } else {
+            const letraUser = String.fromCharCode(97 + respuestaUser);
+            const textoUser = preguntasArray[i].options[respuestaUser];
+            feedbackDiv.className = 'feedback-modal incorrect';
+            feedbackDiv.innerHTML = `<strong>❌ Incorrecto</strong><br>Tu respuesta: ${letraUser}) ${textoUser}<br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
+            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
+            if (correctRadio) {
+                correctRadio.parentElement.style.backgroundColor = '#d4edda';
+                correctRadio.parentElement.style.border = '2px solid #28a745';
+            }
+            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
+            if (userRadio) {
+                userRadio.parentElement.style.backgroundColor = '#f8d7da';
+                userRadio.parentElement.style.border = '2px solid #dc3545';
+            }
+        }
+    }
+    
+    const porcentaje = Math.round((correctas / total) * 100);
+    const resultModal = document.getElementById('resultModalGeneral');
+    const resultScore = document.getElementById('resultScoreGeneral');
+    const resultDetails = document.getElementById('resultDetailsGeneral');
+    
+    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
+    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
+    
+    let mensaje = '';
+    if (porcentaje >= 90) mensaje = `🎉 ¡Excelente! Dominas ${materiaNombre}.`;
+    else if (porcentaje >= 70) mensaje = `📘 ¡Bien en ${materiaNombre}! Sigue así.`;
+    else if (porcentaje >= 50) mensaje = `📚 Necesitas repasar ${materiaNombre}.`;
+    else mensaje = `⚠️ Estudia más ${materiaNombre}. ¡Tú puedes!`;
+    
+    resultDetails.innerHTML = mensaje;
+    resultModal.style.display = 'block';
+    document.getElementById('overlayGeneral').style.display = 'block';
+}
+
+// ========== CONFIGURAR BOTONES DE LAS TARJETAS (ampliar) ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // Botón Inglés
+    const btnIngles = document.querySelector('.card-btn[data-materia="Inglés"]');
+    if (btnIngles) {
+        btnIngles.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenIngles();
+        };
+        btnIngles.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Botón Ética Digital
+    const btnEtica = document.querySelector('.card-btn[data-materia="Ética Digital"]');
+    if (btnEtica) {
+        btnEtica.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenEtica();
+        };
+        btnEtica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+    
+    // Botón Salud y Sexualidad
+    const btnSalud = document.querySelector('.card-btn[data-materia="Salud y Sexualidad"]');
+    if (btnSalud) {
+        btnSalud.onclick = function(e) {
+            e.preventDefault();
+            abrirExamenSalud();
+        };
+        btnSalud.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
+    }
+});
+  </script>
+        <!-- ========== MODAL CUESTIONARIO ESPAÑOL ========== -->
+<div id="quizModalEspanol" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-language"></i> Examen - Español</h3>
+            <button class="close-modal-quiz" onclick="cerrarModalEspanol()">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyEspanol"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamenEspanol()"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamenEspanol()"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL DE RESULTADOS ========== -->
+<div id="resultModalEspanol" class="result-modal-quiz">
+    <h3><i class="fas fa-chart-simple"></i> Resultado</h3>
+    <div id="resultScoreEspanol" class="result-score-modal"></div>
+    <div id="resultDetailsEspanol"></div>
+    <button class="btn-close-result" onclick="cerrarResultadoEspanol()">Cerrar</button>
+</div>
+<div id="overlayEspanol" class="overlay-modal" onclick="cerrarResultadoEspanol()"></div>
+
+        <!-- ========== MODAL CUESTIONARIO MATEMÁTICAS ========== -->
+<div id="quizModalMatematicas" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-calculator"></i> Examen - Matemáticas</h3>
+            <button class="close-modal-quiz" onclick="cerrarModalMatematicas()">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyMatematicas"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamenMatematicas()"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamenMatematicas()"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+        <!-- ========== MODAL FÍSICA ========== -->
+<div id="quizModalFisica" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-atom"></i> Examen - Física</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalFisica')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyFisica"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('fisica')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('fisica')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL QUÍMICA ========== -->
+<div id="quizModalQuimica" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-flask"></i> Examen - Química</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalQuimica')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyQuimica"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('quimica')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('quimica')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL BIOLOGÍA ========== -->
+<div id="quizModalBiologia" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-seedling"></i> Examen - Biología</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalBiologia')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyBiologia"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('biologia')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('biologia')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL HISTORIA ========== -->
+<div id="quizModalHistoria" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-landmark"></i> Examen - Historia</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalHistoria')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyHistoria"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('historia')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('historia')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL COMPUTACIÓN ========== -->
+<div id="quizModalComputacion" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-laptop-code"></i> Examen - Computación</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalComputacion')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyComputacion"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('computacion')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('computacion')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL INGLÉS ========== -->
+<div id="quizModalIngles" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-language"></i> Examen - Inglés</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalIngles')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyIngles"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('ingles')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('ingles')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL ÉTICA DIGITAL ========== -->
+<div id="quizModalEtica" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-balance-scale"></i> Examen - Ética Digital</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalEtica')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodyEtica"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('etica')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('etica')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL SALUD Y SEXUALIDAD ========== -->
+<div id="quizModalSalud" class="modal-quiz">
+    <div class="modal-quiz-content">
+        <div class="modal-quiz-header">
+            <h3><i class="fas fa-heartbeat"></i> Examen - Salud y Sexualidad</h3>
+            <button class="close-modal-quiz" onclick="cerrarModal('quizModalSalud')">&times;</button>
+        </div>
+        <div class="quiz-body-modal" id="quizBodySalud"></div>
+        <div class="modal-quiz-footer">
+            <button class="btn-reset-quiz" onclick="reiniciarExamen('salud')"><i class="fas fa-undo-alt"></i> Reiniciar</button>
+            <button class="btn-submit-quiz" onclick="calificarExamen('salud')"><i class="fas fa-check-circle"></i> Calificar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ========== MODAL DE RESULTADOS (COMPARTIDO) ========== -->
+<div id="resultModalGeneral" class="result-modal-quiz">
+    <h3><i class="fas fa-chart-simple"></i> Resultado del examen</h3>
+    <div id="resultScoreGeneral" class="result-score-modal"></div>
+    <div id="resultDetailsGeneral"></div>
+    <button class="btn-close-result" onclick="cerrarResultadoGeneral()">Cerrar</button>
+</div>
+<div id="overlayGeneral" class="overlay-modal" onclick="cerrarResultadoGeneral()"></div>
+</body>
+</html>
