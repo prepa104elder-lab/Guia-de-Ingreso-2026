@@ -1319,7 +1319,7 @@ function abrirExamenBiologia() {
     document.getElementById('quizModalBiologia').style.display = 'block';
 }
 
-// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS ==========
+// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS (COMPLETA) ==========
 function seleccionarRespuesta(materia, qIdx, optIdx) {
     if (materia === 'fisica') {
         respuestasFisica[qIdx] = optIdx;
@@ -1333,12 +1333,33 @@ function seleccionarRespuesta(materia, qIdx, optIdx) {
         respuestasBiologia[qIdx] = optIdx;
         const radio = document.getElementById(`biologia${qIdx}_${optIdx}`);
         if (radio) radio.checked = true;
+    } else if (materia === 'historia') {
+        respuestasHistoria[qIdx] = optIdx;
+        const radio = document.getElementById(`historia${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'computacion') {
+        respuestasComputacion[qIdx] = optIdx;
+        const radio = document.getElementById(`computacion${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'ingles') {
+        respuestasingles[qIdx] = optIdx;
+        const radio = document.getElementById(`ingles${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'etica') {
+        respuestasEtica[qIdx] = optIdx;
+        const radio = document.getElementById(`etica${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
+    } else if (materia === 'salud') {
+        respuestasSalud[qIdx] = optIdx;
+        const radio = document.getElementById(`salud${qIdx}_${optIdx}`);
+        if (radio) radio.checked = true;
     }
 }
 
-// ========== FUNCIONES PARA REINICIAR EXÁMENES ==========
+// ========== FUNCIÓN GENERAL PARA REINICIAR EXÁMENES (COMPLETA) ==========
 function reiniciarExamen(materia) {
     let preguntasArray, respuestasObj, prefix;
+    
     if (materia === 'fisica') {
         preguntasArray = preguntasFisica;
         respuestasObj = respuestasFisica;
@@ -1351,14 +1372,32 @@ function reiniciarExamen(materia) {
         preguntasArray = preguntasBiologia;
         respuestasObj = respuestasBiologia;
         prefix = 'biologia';
+    } else if (materia === 'historia') {
+        preguntasArray = preguntasHistoria;
+        respuestasObj = respuestasHistoria;
+        prefix = 'historia';
+    } else if (materia === 'computacion') {
+        preguntasArray = preguntasComputacion;
+        respuestasObj = respuestasComputacion;
+        prefix = 'computacion';
+    } else if (materia === 'ingles') {
+        preguntasArray = preguntasIngles;
+        respuestasObj = respuestasingles;
+        prefix = 'ingles';
+    } else if (materia === 'etica') {
+        preguntasArray = preguntasEtica;
+        respuestasObj = respuestasEtica;
+        prefix = 'etica';
+    } else if (materia === 'salud') {
+        preguntasArray = preguntasSalud;
+        respuestasObj = respuestasSalud;
+        prefix = 'salud';
     } else {
         return;
     }
     
-    // Limpiar respuestas
     for (let key in respuestasObj) delete respuestasObj[key];
     
-    // Limpiar radios y feedbacks
     for (let i = 0; i < preguntasArray.length; i++) {
         const radios = document.querySelectorAll(`input[name="${prefix}${i}"]`);
         radios.forEach(radio => radio.checked = false);
@@ -1367,7 +1406,6 @@ function reiniciarExamen(materia) {
             feedback.className = 'feedback-modal';
             feedback.innerHTML = '';
         }
-        // Limpiar estilos de opciones
         const optionsDivs = document.querySelectorAll(`#q-${prefix}-${i} .option-modal`);
         optionsDivs.forEach(opt => {
             opt.style.backgroundColor = '';
@@ -1376,9 +1414,10 @@ function reiniciarExamen(materia) {
     }
 }
 
-// ========== FUNCIÓN GENERAL PARA CALIFICAR ==========
+// ========== FUNCIÓN GENERAL PARA CALIFICAR (COMPLETA) ==========
 function calificarExamen(materia) {
     let preguntasArray, respuestasObj, prefix, materiaNombre;
+    
     if (materia === 'fisica') {
         preguntasArray = preguntasFisica;
         respuestasObj = respuestasFisica;
@@ -1394,6 +1433,31 @@ function calificarExamen(materia) {
         respuestasObj = respuestasBiologia;
         prefix = 'biologia';
         materiaNombre = 'Biología';
+    } else if (materia === 'historia') {
+        preguntasArray = preguntasHistoria;
+        respuestasObj = respuestasHistoria;
+        prefix = 'historia';
+        materiaNombre = 'Historia';
+    } else if (materia === 'computacion') {
+        preguntasArray = preguntasComputacion;
+        respuestasObj = respuestasComputacion;
+        prefix = 'computacion';
+        materiaNombre = 'Computación';
+    } else if (materia === 'ingles') {
+        preguntasArray = preguntasIngles;
+        respuestasObj = respuestasingles;
+        prefix = 'ingles';
+        materiaNombre = 'Inglés';
+    } else if (materia === 'etica') {
+        preguntasArray = preguntasEtica;
+        respuestasObj = respuestasEtica;
+        prefix = 'etica';
+        materiaNombre = 'Ética Digital';
+    } else if (materia === 'salud') {
+        preguntasArray = preguntasSalud;
+        respuestasObj = respuestasSalud;
+        prefix = 'salud';
+        materiaNombre = 'Salud y Sexualidad';
     } else {
         return;
     }
@@ -1412,42 +1476,15 @@ function calificarExamen(materia) {
         
         if (respuestaUser === undefined) {
             feedbackDiv.className = 'feedback-modal incorrect';
-            feedbackDiv.innerHTML = `
-                <strong>❌ No respondiste</strong><br>
-                📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
-            `;
-            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
-            if (correctRadio) {
-                correctRadio.parentElement.style.backgroundColor = '#d4edda';
-                correctRadio.parentElement.style.border = '2px solid #28a745';
-            }
+            feedbackDiv.innerHTML = `<strong>❌ No respondiste</strong><br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
         } else if (esCorrecta) {
             feedbackDiv.className = 'feedback-modal correct';
             feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong>`;
-            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
-            if (userRadio) {
-                userRadio.parentElement.style.backgroundColor = '#d4edda';
-                userRadio.parentElement.style.border = '2px solid #28a745';
-            }
         } else {
             const letraUser = String.fromCharCode(97 + respuestaUser);
             const textoUser = preguntasArray[i].options[respuestaUser];
             feedbackDiv.className = 'feedback-modal incorrect';
-            feedbackDiv.innerHTML = `
-                <strong>❌ Incorrecto</strong><br>
-                Tu respuesta: ${letraUser}) ${textoUser}<br>
-                📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>
-            `;
-            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
-            if (correctRadio) {
-                correctRadio.parentElement.style.backgroundColor = '#d4edda';
-                correctRadio.parentElement.style.border = '2px solid #28a745';
-            }
-            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
-            if (userRadio) {
-                userRadio.parentElement.style.backgroundColor = '#f8d7da';
-                userRadio.parentElement.style.border = '2px solid #dc3545';
-            }
+            feedbackDiv.innerHTML = `<strong>❌ Incorrecto</strong><br>Tu respuesta: ${letraUser}) ${textoUser}<br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
         }
     }
     
@@ -1466,7 +1503,6 @@ function calificarExamen(materia) {
     else mensaje = `⚠️ Estudia más ${materiaNombre}. ¡Tú puedes!`;
     
     resultDetails.innerHTML = mensaje;
-    
     resultModal.style.display = 'block';
     document.getElementById('overlayGeneral').style.display = 'block';
 }
@@ -1622,133 +1658,7 @@ function abrirExamenComputacion() {
     document.getElementById('quizModalComputacion').style.display = 'block';
 }
 
-// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS ==========
-function seleccionarRespuesta(materia, qIdx, optIdx) {
-    if (materia === 'historia') {
-        respuestasHistoria[qIdx] = optIdx;
-        const radio = document.getElementById(`historia${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    } else if (materia === 'computacion') {
-        respuestasComputacion[qIdx] = optIdx;
-        const radio = document.getElementById(`computacion${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    }
-}
 
-// ========== FUNCIONES PARA REINICIAR EXÁMENES ==========
-function reiniciarExamen(materia) {
-    let preguntasArray, respuestasObj, prefix;
-    if (materia === 'historia') {
-        preguntasArray = preguntasHistoria;
-        respuestasObj = respuestasHistoria;
-        prefix = 'historia';
-    } else if (materia === 'computacion') {
-        preguntasArray = preguntasComputacion;
-        respuestasObj = respuestasComputacion;
-        prefix = 'computacion';
-    } else {
-        return;
-    }
-    
-    for (let key in respuestasObj) delete respuestasObj[key];
-    
-    for (let i = 0; i < preguntasArray.length; i++) {
-        const radios = document.querySelectorAll(`input[name="${prefix}${i}"]`);
-        radios.forEach(radio => radio.checked = false);
-        const feedback = document.getElementById(`feedback-${prefix}-${i}`);
-        if (feedback) {
-            feedback.className = 'feedback-modal';
-            feedback.innerHTML = '';
-        }
-        const optionsDivs = document.querySelectorAll(`#q-${prefix}-${i} .option-modal`);
-        optionsDivs.forEach(opt => {
-            opt.style.backgroundColor = '';
-            opt.style.border = '';
-        });
-    }
-}
-
-// ========== FUNCIÓN GENERAL PARA CALIFICAR ==========
-function calificarExamen(materia) {
-    let preguntasArray, respuestasObj, prefix, materiaNombre;
-    if (materia === 'historia') {
-        preguntasArray = preguntasHistoria;
-        respuestasObj = respuestasHistoria;
-        prefix = 'historia';
-        materiaNombre = 'Historia';
-    } else if (materia === 'computacion') {
-        preguntasArray = preguntasComputacion;
-        respuestasObj = respuestasComputacion;
-        prefix = 'computacion';
-        materiaNombre = 'Computación';
-    } else {
-        return;
-    }
-    
-    let correctas = 0;
-    const total = preguntasArray.length;
-    
-    for (let i = 0; i < total; i++) {
-        const respuestaUser = respuestasObj[i];
-        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasArray[i].correct);
-        if (esCorrecta) correctas++;
-        
-        const feedbackDiv = document.getElementById(`feedback-${prefix}-${i}`);
-        const letraCorrecta = String.fromCharCode(97 + preguntasArray[i].correct);
-        const textoCorrecto = preguntasArray[i].options[preguntasArray[i].correct];
-        
-        if (respuestaUser === undefined) {
-            feedbackDiv.className = 'feedback-modal incorrect';
-            feedbackDiv.innerHTML = `<strong>❌ No respondiste</strong><br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
-            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
-            if (correctRadio) {
-                correctRadio.parentElement.style.backgroundColor = '#d4edda';
-                correctRadio.parentElement.style.border = '2px solid #28a745';
-            }
-        } else if (esCorrecta) {
-            feedbackDiv.className = 'feedback-modal correct';
-            feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong>`;
-            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
-            if (userRadio) {
-                userRadio.parentElement.style.backgroundColor = '#d4edda';
-                userRadio.parentElement.style.border = '2px solid #28a745';
-            }
-        } else {
-            const letraUser = String.fromCharCode(97 + respuestaUser);
-            const textoUser = preguntasArray[i].options[respuestaUser];
-            feedbackDiv.className = 'feedback-modal incorrect';
-            feedbackDiv.innerHTML = `<strong>❌ Incorrecto</strong><br>Tu respuesta: ${letraUser}) ${textoUser}<br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
-            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
-            if (correctRadio) {
-                correctRadio.parentElement.style.backgroundColor = '#d4edda';
-                correctRadio.parentElement.style.border = '2px solid #28a745';
-            }
-            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
-            if (userRadio) {
-                userRadio.parentElement.style.backgroundColor = '#f8d7da';
-                userRadio.parentElement.style.border = '2px solid #dc3545';
-            }
-        }
-    }
-    
-    const porcentaje = Math.round((correctas / total) * 100);
-    const resultModal = document.getElementById('resultModalGeneral');
-    const resultScore = document.getElementById('resultScoreGeneral');
-    const resultDetails = document.getElementById('resultDetailsGeneral');
-    
-    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
-    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
-    
-    let mensaje = '';
-    if (porcentaje >= 90) mensaje = `🎉 ¡Excelente! Dominas ${materiaNombre}.`;
-    else if (porcentaje >= 70) mensaje = `📘 ¡Bien en ${materiaNombre}! Sigue así.`;
-    else if (porcentaje >= 50) mensaje = `📚 Necesitas repasar ${materiaNombre}.`;
-    else mensaje = `⚠️ Estudia más ${materiaNombre}. ¡Tú puedes!`;
-    
-    resultDetails.innerHTML = mensaje;
-    resultModal.style.display = 'block';
-    document.getElementById('overlayGeneral').style.display = 'block';
-}
 
 // ========== FUNCIONES PARA CERRAR MODALES ==========
 function cerrarModal(modalId) {
@@ -1944,208 +1854,7 @@ function abrirExamenSalud() {
     document.getElementById('quizModalSalud').style.display = 'block';
 }
 
-// ========== FUNCIÓN GENERAL PARA SELECCIONAR RESPUESTAS (ampliar la existente) ==========
-// Nota: Esta función ya existe en tu código. Solo agrega estos casos dentro de la función que ya tienes.
-// Si prefieres reemplazar la función completa, usa esta versión:
 
-function seleccionarRespuesta(materia, qIdx, optIdx) {
-    if (materia === 'historia') {
-        respuestasHistoria[qIdx] = optIdx;
-        const radio = document.getElementById(`historia${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    } else if (materia === 'computacion') {
-        respuestasComputacion[qIdx] = optIdx;
-        const radio = document.getElementById(`computacion${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    } else if (materia === 'ingles') {
-        respuestasingles[qIdx] = optIdx;
-        const radio = document.getElementById(`ingles${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    } else if (materia === 'etica') {
-        respuestasEtica[qIdx] = optIdx;
-        const radio = document.getElementById(`etica${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    } else if (materia === 'salud') {
-        respuestasSalud[qIdx] = optIdx;
-        const radio = document.getElementById(`salud${qIdx}_${optIdx}`);
-        if (radio) radio.checked = true;
-    }
-}
-
-// ========== FUNCIONES PARA REINICIAR EXÁMENES (ampliar la existente) ==========
-function reiniciarExamen(materia) {
-    let preguntasArray, respuestasObj, prefix;
-    if (materia === 'historia') {
-        preguntasArray = preguntasHistoria;
-        respuestasObj = respuestasHistoria;
-        prefix = 'historia';
-    } else if (materia === 'computacion') {
-        preguntasArray = preguntasComputacion;
-        respuestasObj = respuestasComputacion;
-        prefix = 'computacion';
-    } else if (materia === 'ingles') {
-        preguntasArray = preguntasIngles;
-        respuestasObj = respuestasingles;
-        prefix = 'ingles';
-    } else if (materia === 'etica') {
-        preguntasArray = preguntasEtica;
-        respuestasObj = respuestasEtica;
-        prefix = 'etica';
-    } else if (materia === 'salud') {
-        preguntasArray = preguntasSalud;
-        respuestasObj = respuestasSalud;
-        prefix = 'salud';
-    } else {
-        return;
-    }
-    
-    for (let key in respuestasObj) delete respuestasObj[key];
-    
-    for (let i = 0; i < preguntasArray.length; i++) {
-        const radios = document.querySelectorAll(`input[name="${prefix}${i}"]`);
-        radios.forEach(radio => radio.checked = false);
-        const feedback = document.getElementById(`feedback-${prefix}-${i}`);
-        if (feedback) {
-            feedback.className = 'feedback-modal';
-            feedback.innerHTML = '';
-        }
-        const optionsDivs = document.querySelectorAll(`#q-${prefix}-${i} .option-modal`);
-        optionsDivs.forEach(opt => {
-            opt.style.backgroundColor = '';
-            opt.style.border = '';
-        });
-    }
-}
-
-// ========== FUNCIÓN GENERAL PARA CALIFICAR (ampliar la existente) ==========
-function calificarExamen(materia) {
-    let preguntasArray, respuestasObj, prefix, materiaNombre;
-    if (materia === 'historia') {
-        preguntasArray = preguntasHistoria;
-        respuestasObj = respuestasHistoria;
-        prefix = 'historia';
-        materiaNombre = 'Historia';
-    } else if (materia === 'computacion') {
-        preguntasArray = preguntasComputacion;
-        respuestasObj = respuestasComputacion;
-        prefix = 'computacion';
-        materiaNombre = 'Computación';
-    } else if (materia === 'ingles') {
-        preguntasArray = preguntasIngles;
-        respuestasObj = respuestasingles;
-        prefix = 'ingles';
-        materiaNombre = 'Inglés';
-    } else if (materia === 'etica') {
-        preguntasArray = preguntasEtica;
-        respuestasObj = respuestasEtica;
-        prefix = 'etica';
-        materiaNombre = 'Ética Digital';
-    } else if (materia === 'salud') {
-        preguntasArray = preguntasSalud;
-        respuestasObj = respuestasSalud;
-        prefix = 'salud';
-        materiaNombre = 'Salud y Sexualidad';
-    } else {
-        return;
-    }
-    
-    let correctas = 0;
-    const total = preguntasArray.length;
-    
-    for (let i = 0; i < total; i++) {
-        const respuestaUser = respuestasObj[i];
-        const esCorrecta = (respuestaUser !== undefined && respuestaUser === preguntasArray[i].correct);
-        if (esCorrecta) correctas++;
-        
-        const feedbackDiv = document.getElementById(`feedback-${prefix}-${i}`);
-        const letraCorrecta = String.fromCharCode(97 + preguntasArray[i].correct);
-        const textoCorrecto = preguntasArray[i].options[preguntasArray[i].correct];
-        
-        if (respuestaUser === undefined) {
-            feedbackDiv.className = 'feedback-modal incorrect';
-            feedbackDiv.innerHTML = `<strong>❌ No respondiste</strong><br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
-            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
-            if (correctRadio) {
-                correctRadio.parentElement.style.backgroundColor = '#d4edda';
-                correctRadio.parentElement.style.border = '2px solid #28a745';
-            }
-        } else if (esCorrecta) {
-            feedbackDiv.className = 'feedback-modal correct';
-            feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong>`;
-            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
-            if (userRadio) {
-                userRadio.parentElement.style.backgroundColor = '#d4edda';
-                userRadio.parentElement.style.border = '2px solid #28a745';
-            }
-        } else {
-            const letraUser = String.fromCharCode(97 + respuestaUser);
-            const textoUser = preguntasArray[i].options[respuestaUser];
-            feedbackDiv.className = 'feedback-modal incorrect';
-            feedbackDiv.innerHTML = `<strong>❌ Incorrecto</strong><br>Tu respuesta: ${letraUser}) ${textoUser}<br>📖 Correcta: <span style="font-weight: bold;">${letraCorrecta}) ${textoCorrecto}</span>`;
-            const correctRadio = document.getElementById(`${prefix}${i}_${preguntasArray[i].correct}`);
-            if (correctRadio) {
-                correctRadio.parentElement.style.backgroundColor = '#d4edda';
-                correctRadio.parentElement.style.border = '2px solid #28a745';
-            }
-            const userRadio = document.getElementById(`${prefix}${i}_${respuestaUser}`);
-            if (userRadio) {
-                userRadio.parentElement.style.backgroundColor = '#f8d7da';
-                userRadio.parentElement.style.border = '2px solid #dc3545';
-            }
-        }
-    }
-    
-    const porcentaje = Math.round((correctas / total) * 100);
-    const resultModal = document.getElementById('resultModalGeneral');
-    const resultScore = document.getElementById('resultScoreGeneral');
-    const resultDetails = document.getElementById('resultDetailsGeneral');
-    
-    resultScore.innerHTML = `${correctas} / ${total}<br><span style="font-size: 1.2rem;">${porcentaje}%</span>`;
-    resultScore.className = `result-score-modal ${porcentaje >= 70 ? 'correct' : 'incorrect'}`;
-    
-    let mensaje = '';
-    if (porcentaje >= 90) mensaje = `🎉 ¡Excelente! Dominas ${materiaNombre}.`;
-    else if (porcentaje >= 70) mensaje = `📘 ¡Bien en ${materiaNombre}! Sigue así.`;
-    else if (porcentaje >= 50) mensaje = `📚 Necesitas repasar ${materiaNombre}.`;
-    else mensaje = `⚠️ Estudia más ${materiaNombre}. ¡Tú puedes!`;
-    
-    resultDetails.innerHTML = mensaje;
-    resultModal.style.display = 'block';
-    document.getElementById('overlayGeneral').style.display = 'block';
-}
-
-// ========== CONFIGURAR BOTONES DE LAS TARJETAS (ampliar) ==========
-document.addEventListener('DOMContentLoaded', function() {
-    // Botón Inglés
-    const btnIngles = document.querySelector('.card-btn[data-materia="Inglés"]');
-    if (btnIngles) {
-        btnIngles.onclick = function(e) {
-            e.preventDefault();
-            abrirExamenIngles();
-        };
-        btnIngles.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
-    }
-    
-    // Botón Ética Digital
-    const btnEtica = document.querySelector('.card-btn[data-materia="Ética Digital"]');
-    if (btnEtica) {
-        btnEtica.onclick = function(e) {
-            e.preventDefault();
-            abrirExamenEtica();
-        };
-        btnEtica.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
-    }
-    
-    // Botón Salud y Sexualidad
-    const btnSalud = document.querySelector('.card-btn[data-materia="Salud y Sexualidad"]');
-    if (btnSalud) {
-        btnSalud.onclick = function(e) {
-            e.preventDefault();
-            abrirExamenSalud();
-        };
-        btnSalud.innerHTML = '<i class="fas fa-pen-alt me-1"></i> Tomar examen';
-    }
-});
   </script>
         <!-- ========== MODAL CUESTIONARIO ESPAÑOL ========== -->
 <div id="quizModalEspanol" class="modal-quiz">
@@ -2229,7 +1938,14 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div>
-
+<!-- ========== MODAL DE RESULTADOS GENERAL (para Física, Química, Biología) ========== -->
+<div id="resultModalGeneral" class="result-modal-quiz">
+    <h3><i class="fas fa-chart-simple"></i> Resultado del examen</h3>
+    <div id="resultScoreGeneral" class="result-score-modal"></div>
+    <div id="resultDetailsGeneral"></div>
+    <button class="btn-close-result" onclick="cerrarResultadoGeneral()">Cerrar</button>
+</div>
+<div id="overlayGeneral" class="overlay-modal" onclick="cerrarResultadoGeneral()"></div>
 <!-- ========== MODAL HISTORIA ========== -->
 <div id="quizModalHistoria" class="modal-quiz">
     <div class="modal-quiz-content">
