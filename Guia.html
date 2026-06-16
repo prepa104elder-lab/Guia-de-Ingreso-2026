@@ -867,6 +867,12 @@ function reiniciarExamenEspanol() {
             feedback.className = 'feedback-modal';
             feedback.innerHTML = '';
         }
+        // ✅ AÑADE ESTA PARTE (IGUAL QUE EN MATEMÁTICAS)
+        const optionsDivs = document.querySelectorAll(`#q-espanol-${i} .option-modal`);
+        optionsDivs.forEach(opt => {
+            opt.style.backgroundColor = '';
+            opt.style.border = '';
+        });
     }
 }
 
