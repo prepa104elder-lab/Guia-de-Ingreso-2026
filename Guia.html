@@ -731,15 +731,29 @@
     }
     
     // ========== BOTÓN DE NOTIFICACIÓN DEL NAVBAR ==========
-    document.getElementById('notifyBtn')?.addEventListener('click', () => {
-        Swal.fire({ 
-            title: '<i class="fas fa-bell"></i> Convocatoria 2026', 
-            html: 'Próximos exámenes de admisión. Consulta fechas en la escuela.', 
-            icon: 'info', 
-            confirmButtonText: 'Ok' 
-        });
+document.getElementById('notifyBtn')?.addEventListener('click', () => {
+    Swal.fire({
+        title: '📢 Convocatoria 2026',
+        html: `
+            <div style="text-align: left; padding: 10px;">
+                <p><strong>📅 Fecha:</strong> Lunes 13 de Julio de 2026</p>
+                <p><strong>⏰ Hora:</strong> 8:00 AM</p>
+                <p><strong>📍 Lugar:</strong> Escuela Preparatoria Lic. Benito Juárez</p>
+                <hr>
+                <p><strong>📝 Requisitos:</strong></p>
+                <ul style="text-align: left;">
+                    <li>📐 Calculadora Científica</li>
+                    <li>✏️ Lápiz y goma</li>
+                    <li>🪪 Documento de identidad</li>
+                </ul>
+            </div>
+        `,
+        icon: 'info',
+        confirmButtonText: 'Entendido ✅',
+        confirmButtonColor: '#3085d6',
+        backdrop: 'rgba(0,0,0,0.6)'
     });
-    
+});
     // ========== FORMULARIO WHATSAPP ==========
     const waForm = document.getElementById('whatsappForm');
     const numeroEscuela = "4351103935";
