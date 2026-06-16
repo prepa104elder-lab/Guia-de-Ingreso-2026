@@ -774,8 +774,8 @@ document.getElementById('notifyBtn')?.addEventListener('click', () => {
             }
             
             let textoWhatsApp = `*Nuevo mensaje desde la página web*\n \n`;
-            textoWhatsApp += `📌 *Nombre:* ${nombre}\n`;
-            textoWhatsApp += `❓ *Duda o pregunta: * ${mensaje}\n`;
+            textoWhatsApp += ` *Nombre:* ${nombre}\n`;
+            textoWhatsApp += ` *Duda o pregunta:* ${mensaje}\n`;
             textoWhatsApp += `---\nEnviado desde la Guía de Ingreso 2026.`;
             
             const mensajeCodificado = encodeURIComponent(textoWhatsApp);
