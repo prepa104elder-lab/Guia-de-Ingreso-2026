@@ -756,7 +756,7 @@ document.getElementById('notifyBtn')?.addEventListener('click', () => {
 });
     // ========== FORMULARIO WHATSAPP ==========
     const waForm = document.getElementById('whatsappForm');
-    const numeroEscuela = "4351103935";
+    const numeroEscuela = "4351072951";
     
     if (waForm) {
         waForm.addEventListener('submit', function(e) {
@@ -773,9 +773,9 @@ document.getElementById('notifyBtn')?.addEventListener('click', () => {
                 return;
             }
             
-            let textoWhatsApp = `*Nuevo mensaje desde la página web - Prepa Benito Juárez*\n`;
+            let textoWhatsApp = `*Nuevo mensaje desde la página web*\n \n`;
             textoWhatsApp += `📌 *Nombre:* ${nombre}\n`;
-            textoWhatsApp += `❓ *Duda o pregunta:*\n${mensaje}\n`;
+            textoWhatsApp += `❓ *Duda o pregunta: * ${mensaje}\n`;
             textoWhatsApp += `---\nEnviado desde la Guía de Ingreso 2026.`;
             
             const mensajeCodificado = encodeURIComponent(textoWhatsApp);
